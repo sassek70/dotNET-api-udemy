@@ -174,6 +174,8 @@ namespace HelloWorld // namespace depends on the project name.
                 {"Cheese", "Dairy"}
             };
 
+            Console.WriteLine(myGroceryDictionary["Cheese"]);
+
             Dictionary<string, string[]> mySecondGroceryDictionary = new Dictionary<string, string[]>(){
                 {"Dairy", new string[]{"Cheese", "Milk"}} //will map to an array of strings
             };
