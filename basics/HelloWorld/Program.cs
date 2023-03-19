@@ -52,63 +52,77 @@ namespace HelloWorld // namespace depends on the project name.
             Console.WriteLine("Hello World!");
 
             // sbyte = Signed Byte: 8-bit integers, value range: -128 - 127
-            sbyte mySbyte = 127;
-            sbyte mySecondSbyte = -128;
+            // sbyte mySbyte = 127;
+            // sbyte mySecondSbyte = -128;
 
             // byte = Unsigned Byte: 8-bit integers, value range: 0 - 255
-            byte myByte = 255;
-            byte mySecondByte = 0;
+            // byte myByte = 255;
+            // byte mySecondByte = 0;
 
             // short = Signed Short: 16-bit integer, value range -32768 - 32767 
-            short myShort = -32768; // Signed Short - maximum value: -32768 - 32768
+            // short myShort = -32768; // Signed Short - maximum value: -32768 - 32768
 
             // ushort = Unsigned Short: 16-bit integer, value range 0 - 65535
-            ushort myUshort = 65535;
+            // ushort myUshort = 65535;
 
             // int = Signed Integer - most used: 32-bit integer,value range: -2,147,483,648 - 2,147,483,647
-            int myInt = 2147483647;
-            int mySecondInt = -2147483648;
+            // int myInt = 2147483647;
+            // int mySecondInt = -2147483648;
 
             // long = Signed Integer: 64-bit integer, value range: -9,223,372,036,854,775,808 - 9,223,372,036,854,775,807
-            long myLong = 9223372036854775807;  
-            long mySecondLong = -9223372036854775808;  
+            // long myLong = 9223372036854775807;  
+            // long mySecondLong = -9223372036854775808;  
 
             // float = Signed Decimal: 32-bit decimal (single-precision)
-            float myFloat = 0.751f; // must include "f" in the value to denote that it is a float C# will infer this to be a "double" otherwise
-            float mySecondFloat = 0.751f;
-            float myThirdFloat = 0.75f;
+            // float myFloat = 0.751f; // must include "f" in the value to denote that it is a float C# will infer this to be a "double" otherwise
+            // float mySecondFloat = 0.751f;
+            // float myThirdFloat = 0.75f;
             
             // double = Signed Decimal: 64-bit decimal (double-precision) -- "d" is optional, 
-            double myDouble = 0.751;
-            double mySecondDouble = 0.751d;
-            double myThirdDouble = 0.75d;
+            // double myDouble = 0.751;
+            // double mySecondDouble = 0.751d;
+            // double myThirdDouble = 0.75d;
 
             // decimal = Signed Decimal: 128-bit denoted with "m"
-            decimal myDecimal = 0.751m;
-            decimal mySecondDecimal = 0.751m;
-            decimal myThirdDecimal = 0.75m;
+            // decimal myDecimal = 0.751m;
+            // decimal mySecondDecimal = 0.751m;
+            // decimal myThirdDecimal = 0.75m;
             
             /*
                 Float and Double have some variation in accuracy
                 Float & Double use less space but less accurate
                 Decimal needs more space but more accurate
             */
-            Console.WriteLine("Second value = 0.751");
-            Console.WriteLine(myFloat - mySecondFloat); // second value: 0.751 = 0
-            Console.WriteLine(myDouble - mySecondDouble); // second value: 0.751 = 0
-            Console.WriteLine(myDecimal - mySecondDecimal); // second value: 0.751 = 0.000
+            // Console.WriteLine("Second value = 0.751");
+            // Console.WriteLine(myFloat - mySecondFloat); // second value: 0.751 = 0
+            // Console.WriteLine(myDouble - mySecondDouble); // second value: 0.751 = 0
+            // Console.WriteLine(myDecimal - mySecondDecimal); // second value: 0.751 = 0.000
             
-            Console.WriteLine("Second value = 0.75");          
-            Console.WriteLine(myFloat - myThirdFloat); //  0.0009999871
-            Console.WriteLine(myDouble - myThirdDouble); // 0.0010000000000000009
-            Console.WriteLine(myDecimal - myThirdDecimal); // 0.001
+            // Console.WriteLine("Second value = 0.75");          
+            // Console.WriteLine(myFloat - myThirdFloat); //  0.0009999871
+            // Console.WriteLine(myDouble - myThirdDouble); // 0.0010000000000000009
+            // Console.WriteLine(myDecimal - myThirdDecimal); // 0.001
 
 
-            string myString = "Hello World!";
-            Console.WriteLine(myString);
+            // string myString = "Hello World!";
+            // Console.WriteLine(myString);
 
-            bool myBool = true;
-            Console.WriteLine(myBool);
+            // bool myBool = true;
+            // Console.WriteLine(myBool);
+
+        // ########## ARRAYS ##########
+
+            // declare a string type with [] to declare it as an array of strings.
+            // set value to "new string[x]" where string = array length
+            string[] myGroceryArray = new string[2];
+
+            // assign value to index
+            myGroceryArray[0] = "Guacamole";
+
+            // to print the value, you must specify the index. Otherwise it will print "System.String[]"
+            Console.WriteLine(myGroceryArray[0]); // Guacamole
+            Console.WriteLine(myGroceryArray[1]); // Empty line
+            // Console.WriteLine(myGroceryArray[2]); // Error - System.IndexOutOfRangeException: Index was outside the bounds of the array.
             
         }
     }
