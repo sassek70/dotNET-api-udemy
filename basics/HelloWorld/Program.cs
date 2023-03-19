@@ -43,6 +43,7 @@ Third
 
 
 using System;
+using System.Linq;
 namespace HelloWorld // namespace depends on the project name.
 {
     internal class Program
@@ -114,16 +115,75 @@ namespace HelloWorld // namespace depends on the project name.
 
             // declare a string type with [] to declare it as an array of strings.
             // set value to "new string[x]" where string = array length
-            string[] myGroceryArray = new string[2];
+            // string[] myGroceryArray = new string[2];
 
             // assign value to index
-            myGroceryArray[0] = "Guacamole";
+            // myGroceryArray[0] = "Guacamole";
 
             // to print the value, you must specify the index. Otherwise it will print "System.String[]"
-            Console.WriteLine(myGroceryArray[0]); // Guacamole
-            Console.WriteLine(myGroceryArray[1]); // Empty line
+            // Console.WriteLine(myGroceryArray[0]); // Guacamole
+            // Console.WriteLine(myGroceryArray[1]); // Empty line
             // Console.WriteLine(myGroceryArray[2]); // Error - System.IndexOutOfRangeException: Index was outside the bounds of the array.
             
+            // You can declare values when creating the array by setting them in {}, fixed length
+            // string[] mySecondGroceryArray = {"Apples", "Eggs"};
+            // Console.WriteLine(mySecondGroceryArray[0]);
+            // Console.WriteLine(mySecondGroceryArray[1]);
+
+            // Adding dimenstions is denoted by commas(Dimensions = commas + 1 -- [,] = 2, [,,] = 3 etc.)
+                // string[,] = Two Dimensions,
+                // string[,,] = Three Dimensions
+
+            string[,] myTwoDimensionalArray = new string[,] {
+                {"Apples", "Eggs"},
+                {"Milk", "Cereal"}
+            };
+
+            Console.WriteLine(myTwoDimensionalArray[0,1]);
+
+
+            // ########## LISTS ##########
+
+            // List<T> = Strongly typed list of objects that can be accessed by index. "T" is type, i.e: <String>
+            // List is more dynamic than arrays, doesn't need to declare length or values at time of creation.
+            // Can add values by placing them in {} after the ()
+            List<string> myGroceryList = new List<string>() {"Milk", "Cereal"};
+
+            // Console.WriteLine(myGroceryList[0]);
+            // Console.WriteLine(myGroceryList[1]);
+
+            // Add a new value
+            myGroceryList.Add("Cheese");
+            // Console.WriteLine(myGroceryList[2]);
+
+
+            // ########## IENUMERABLE ##########
+
+            // IEnumerable<T> = supports simple iteration over a collection of a specified type. "T" is type
+            // IEnumerable is not indexed.
+            IEnumerable<string> myGroceryIEnumerable = myGroceryList;
+
+            Console.WriteLine(myGroceryIEnumerable.First());
+
+
+        // ########## DICTIONARIES ##########
+            // C# version of an object/hash
+            // Dictionary<key, value>
+
+            Dictionary<string, string> myGroceryDictionary = new Dictionary<string, string>(){
+                {"Cheese", "Dairy"}
+            };
+
+            Dictionary<string, string[]> mySecondGroceryDictionary = new Dictionary<string, string[]>(){
+                {"Dairy", new string[]{"Cheese", "Milk"}} //will map to an array of strings
+            };
+            
+            // Will print the value stored to the key of "Dairy" at specified index => "Cheese"
+            Console.WriteLine(mySecondGroceryDictionary["Dairy"][0]);
+
+
+
+
         }
     }
 }
