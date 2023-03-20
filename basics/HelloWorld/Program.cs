@@ -186,33 +186,33 @@ namespace HelloWorld // namespace depends on the project name.
 
         // ########## OPERATORS ##########
 
-        int myInt = 5;
-        int mySecondInt = 10;
-        Console.WriteLine(myInt);
+        // int myInt = 5;
+        // int mySecondInt = 10;
+        // Console.WriteLine(myInt);
 
-        myInt++;
+        // myInt++;
 
-        Console.WriteLine(myInt);
+        // Console.WriteLine(myInt);
 
-        myInt += 7;
+        // myInt += 7;
 
-        Console.WriteLine(myInt);
+        // Console.WriteLine(myInt);
 
-        myInt -= 8;
+        // myInt -= 8;
 
-        Console.WriteLine(myInt);
+        // Console.WriteLine(myInt);
 
-        Console.WriteLine(myInt * mySecondInt);
-        Console.WriteLine(mySecondInt / myInt);
-        Console.WriteLine(mySecondInt + myInt);
-        Console.WriteLine(myInt - mySecondInt);
-        Console.WriteLine(5 + 5 * 10);
-        Console.WriteLine((5 + 5) * 10);
+        // Console.WriteLine(myInt * mySecondInt);
+        // Console.WriteLine(mySecondInt / myInt);
+        // Console.WriteLine(mySecondInt + myInt);
+        // Console.WriteLine(myInt - mySecondInt);
+        // Console.WriteLine(5 + 5 * 10);
+        // Console.WriteLine((5 + 5) * 10);
 
 
-        // Exponents
-        Console.WriteLine(Math.Pow(5,4)); // 5 raised to the power of 4: Math.Pow(a,b) function. a = base, b = exponent
-        Console.WriteLine(Math.Sqrt(5)); // Square root
+        // // Exponents
+        // Console.WriteLine(Math.Pow(5,4)); // 5 raised to the power of 4: Math.Pow(a,b) function. a = base, b = exponent
+        // Console.WriteLine(Math.Sqrt(5)); // Square root
 
 
 
@@ -248,19 +248,78 @@ namespace HelloWorld // namespace depends on the project name.
 
         // ".Equals" returns a boolean value based on the condition
         // same thing as use "==". "!=" is also available
-        Console.WriteLine(myInt.Equals(mySecondInt));
-        Console.WriteLine(myInt.Equals(mySecondInt / 2));  
+        // Console.WriteLine(myInt.Equals(mySecondInt));
+        // Console.WriteLine(myInt.Equals(mySecondInt / 2));  
 
-        Console.WriteLine(myInt != mySecondInt);
-        Console.WriteLine(myInt == mySecondInt / 2 );  
+        // Console.WriteLine(myInt != mySecondInt);
+        // Console.WriteLine(myInt == mySecondInt / 2 );  
 
-        Console.WriteLine(myInt >= mySecondInt);
-        Console.WriteLine(myInt > mySecondInt / 2 );
-        Console.WriteLine(myInt <= mySecondInt);
-        Console.WriteLine(myInt < mySecondInt / 2 );    
+        // Console.WriteLine(myInt >= mySecondInt);
+        // Console.WriteLine(myInt > mySecondInt / 2 );
+        // Console.WriteLine(myInt <= mySecondInt);
+        // Console.WriteLine(myInt < mySecondInt / 2 );    
 
-        Console.WriteLine(5 < 10 && 5 > 10);    
-        Console.WriteLine(5 < 10 || 5 > 10);    
+        // Console.WriteLine(5 < 10 && 5 > 10);    
+        // Console.WriteLine(5 < 10 || 5 > 10);    
+
+
+
+    // ########## CONDITIONAL STATEMENTS ##########
+
+        int myInt = 5;
+        int mySecondInt = 10;
+
+        // IF Statements work the same way as JS.
+        if (myInt < mySecondInt){
+            myInt += 10;
+        }
+
+        Console.WriteLine(myInt);
+
+        string myCow = "cow";
+        string myCapitalizedCow = "Cow";
+
+        // This vertical spacing is normal c# practice
+        if(myCow == myCapitalizedCow) 
+        {
+            Console.WriteLine("Equal");
+        }
+        else 
+        {
+            Console.WriteLine("ELSE: Not equal");
+        }
+        
+        
+        if(myCow != myCapitalizedCow) 
+        {
+            Console.WriteLine("Not equal");
+        }
+
+        if(myCow == myCapitalizedCow) 
+        {
+            Console.WriteLine("Equal");
+        }
+        else if (myCow == myCapitalizedCow.ToLower())
+        {
+            Console.WriteLine("ELSE IF: Equal");
+        }
+
+        // SWITCH STATEMENT - Same as JS
+        // Cases have to be a constant value, can't be a variable.
+
+        switch (myCow)
+        {
+            case "cow":
+                Console.WriteLine("Lower Case");
+                break;
+            case "Cow":
+                Console.WriteLine("Capital Case");
+                break;
+            default:
+                Console.WriteLine("Default Case");
+                break;
+        }
+
         }
     }
 }
