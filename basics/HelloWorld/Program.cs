@@ -134,12 +134,12 @@ namespace HelloWorld // namespace depends on the project name.
                 // string[,] = Two Dimensions,
                 // string[,,] = Three Dimensions
 
-            string[,] myTwoDimensionalArray = new string[,] {
-                {"Apples", "Eggs"},
-                {"Milk", "Cereal"}
-            };
+            // string[,] myTwoDimensionalArray = new string[,] {
+            //     {"Apples", "Eggs"},
+            //     {"Milk", "Cereal"}
+            // };
 
-            Console.WriteLine(myTwoDimensionalArray[0,1]);
+            // Console.WriteLine(myTwoDimensionalArray[0,1]);
 
 
             // ########## LISTS ##########
@@ -147,13 +147,13 @@ namespace HelloWorld // namespace depends on the project name.
             // List<T> = Strongly typed list of objects that can be accessed by index. "T" is type, i.e: <String>
             // List is more dynamic than arrays, doesn't need to declare length or values at time of creation.
             // Can add values by placing them in {} after the ()
-            List<string> myGroceryList = new List<string>() {"Milk", "Cereal"};
+            // List<string> myGroceryList = new List<string>() {"Milk", "Cereal"};
 
             // Console.WriteLine(myGroceryList[0]);
             // Console.WriteLine(myGroceryList[1]);
 
             // Add a new value
-            myGroceryList.Add("Cheese");
+            // myGroceryList.Add("Cheese");
             // Console.WriteLine(myGroceryList[2]);
 
 
@@ -161,31 +161,106 @@ namespace HelloWorld // namespace depends on the project name.
 
             // IEnumerable<T> = supports simple iteration over a collection of a specified type. "T" is type
             // IEnumerable is not indexed.
-            IEnumerable<string> myGroceryIEnumerable = myGroceryList;
+            // IEnumerable<string> myGroceryIEnumerable = myGroceryList;
 
-            Console.WriteLine(myGroceryIEnumerable.First());
+            // Console.WriteLine(myGroceryIEnumerable.First());
 
 
         // ########## DICTIONARIES ##########
             // C# version of an object/hash
             // Dictionary<key, value>
 
-            Dictionary<string, string> myGroceryDictionary = new Dictionary<string, string>(){
-                {"Cheese", "Dairy"}
-            };
+            // Dictionary<string, string> myGroceryDictionary = new Dictionary<string, string>(){
+                // {"Cheese", "Dairy"}
+            // };
 
-            Console.WriteLine(myGroceryDictionary["Cheese"]);
+            // Console.WriteLine(myGroceryDictionary["Cheese"]);
 
-            Dictionary<string, string[]> mySecondGroceryDictionary = new Dictionary<string, string[]>(){
-                {"Dairy", new string[]{"Cheese", "Milk"}} //will map to an array of strings
-            };
+            // Dictionary<string, string[]> mySecondGroceryDictionary = new Dictionary<string, string[]>(){
+                // {"Dairy", new string[]{"Cheese", "Milk"}} //will map to an array of strings
+            // };
             
             // Will print the value stored to the key of "Dairy" at specified index => "Cheese"
-            Console.WriteLine(mySecondGroceryDictionary["Dairy"][0]);
+            // Console.WriteLine(mySecondGroceryDictionary["Dairy"][0]);
+
+
+        // ########## OPERATORS ##########
+
+        int myInt = 5;
+        int mySecondInt = 10;
+        Console.WriteLine(myInt);
+
+        myInt++;
+
+        Console.WriteLine(myInt);
+
+        myInt += 7;
+
+        Console.WriteLine(myInt);
+
+        myInt -= 8;
+
+        Console.WriteLine(myInt);
+
+        Console.WriteLine(myInt * mySecondInt);
+        Console.WriteLine(mySecondInt / myInt);
+        Console.WriteLine(mySecondInt + myInt);
+        Console.WriteLine(myInt - mySecondInt);
+        Console.WriteLine(5 + 5 * 10);
+        Console.WriteLine((5 + 5) * 10);
+
+
+        // Exponents
+        Console.WriteLine(Math.Pow(5,4)); // 5 raised to the power of 4: Math.Pow(a,b) function. a = base, b = exponent
+        Console.WriteLine(Math.Sqrt(5)); // Square root
 
 
 
+        // string myString = "test.";
 
+        // Console.WriteLine(myString);
+
+        // myString += " second test."; // concatonates like javascript. Same line, adds to end.
+
+        // Console.WriteLine(myString);
+        
+        // myString = myString + " third test."; // concatonates like javascript. Same line, adds to end.
+
+        
+        // Console.WriteLine(myString);
+
+        // myString = myString + " \"fourth\" test."; // using \ as an "escape" to add quotes
+
+        // Console.WriteLine(myString);
+
+        // string[] myStringArray = myString.Split(". ");
+        // string[] myStringArray2 = myString.Split(".");
+
+        // Console.WriteLine(myStringArray[0]);
+        // Console.WriteLine(myStringArray[1]);
+        // Console.WriteLine(myStringArray[2]);
+        // Console.WriteLine(myStringArray[3]);
+
+        // Console.WriteLine(myStringArray2[0]);
+        // Console.WriteLine(myStringArray2[1]);
+        // Console.WriteLine(myStringArray2[2]);
+        // Console.WriteLine(myStringArray2[3]);
+
+        // ".Equals" returns a boolean value based on the condition
+        // same thing as use "==". "!=" is also available
+        Console.WriteLine(myInt.Equals(mySecondInt));
+        Console.WriteLine(myInt.Equals(mySecondInt / 2));  
+
+        Console.WriteLine(myInt != mySecondInt);
+        Console.WriteLine(myInt == mySecondInt / 2 );  
+
+        Console.WriteLine(myInt >= mySecondInt);
+        Console.WriteLine(myInt > mySecondInt / 2 );
+        Console.WriteLine(myInt <= mySecondInt);
+        Console.WriteLine(myInt < mySecondInt / 2 );    
+
+        Console.WriteLine(5 < 10 && 5 > 10);    
+        Console.WriteLine(5 < 10 || 5 > 10);    
         }
     }
 }
