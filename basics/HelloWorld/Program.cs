@@ -266,60 +266,153 @@ namespace HelloWorld // namespace depends on the project name.
 
     // ########## CONDITIONAL STATEMENTS ##########
 
-        int myInt = 5;
-        int mySecondInt = 10;
+        // int myInt = 5;
+        // int mySecondInt = 10;
 
-        // IF Statements work the same way as JS.
-        if (myInt < mySecondInt){
-            myInt += 10;
-        }
+        // // IF Statements work the same way as JS.
+        // if (myInt < mySecondInt){
+        //     myInt += 10;
+        // }
 
-        Console.WriteLine(myInt);
+        // Console.WriteLine(myInt);
 
-        string myCow = "cow";
-        string myCapitalizedCow = "Cow";
+        // string myCow = "cow";
+        // string myCapitalizedCow = "Cow";
 
-        // This vertical spacing is normal c# practice
-        if(myCow == myCapitalizedCow) 
-        {
-            Console.WriteLine("Equal");
-        }
-        else 
-        {
-            Console.WriteLine("ELSE: Not equal");
-        }
+        // // This vertical spacing is normal c# practice
+        // if(myCow == myCapitalizedCow) 
+        // {
+        //     Console.WriteLine("Equal");
+        // }
+        // else 
+        // {
+        //     Console.WriteLine("ELSE: Not equal");
+        // }
         
         
-        if(myCow != myCapitalizedCow) 
-        {
-            Console.WriteLine("Not equal");
-        }
+        // if(myCow != myCapitalizedCow) 
+        // {
+        //     Console.WriteLine("Not equal");
+        // }
 
-        if(myCow == myCapitalizedCow) 
-        {
-            Console.WriteLine("Equal");
-        }
-        else if (myCow == myCapitalizedCow.ToLower())
-        {
-            Console.WriteLine("ELSE IF: Equal");
-        }
+        // if(myCow == myCapitalizedCow) 
+        // {
+        //     Console.WriteLine("Equal");
+        // }
+        // else if (myCow == myCapitalizedCow.ToLower())
+        // {
+        //     Console.WriteLine("ELSE IF: Equal");
+        // }
 
-        // SWITCH STATEMENT - Same as JS
-        // Cases have to be a constant value, can't be a variable.
+        // // SWITCH STATEMENT - Same as JS
+        // // Cases have to be a constant value, can't be a variable.
 
-        switch (myCow)
-        {
-            case "cow":
-                Console.WriteLine("Lower Case");
-                break;
-            case "Cow":
-                Console.WriteLine("Capital Case");
-                break;
-            default:
-                Console.WriteLine("Default Case");
-                break;
-        }
+        // switch (myCow)
+        // {
+        //     case "cow":
+        //         Console.WriteLine("Lower Case");
+        //         break;
+        //     case "Cow":
+        //         Console.WriteLine("Capital Case");
+        //         break;
+        //     default:
+        //         Console.WriteLine("Default Case");
+        //         break;
+        // }
 
+        // ########## LOOPS ##########
+
+        int[] intsToCompress = new int[] {10, 15, 20, 25, 30, 12, 34};
+
+        DateTime startTime = DateTime.Now;
+
+        // Manually add each index -- slow
+        int totalValue = intsToCompress[0] + intsToCompress[1]
+            + intsToCompress[2] + intsToCompress[3]
+            + intsToCompress[4] + intsToCompress[5]
+            + intsToCompress[6];
+
+            Console.WriteLine($"Manual addition: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+            Console.WriteLine($"total: {totalValue}"); // 146
+
+            
+            // For loop - faster
+            int totalValue2 = 0;         
+            startTime = DateTime.Now;
+            
+            for (int i = 0; i < intsToCompress.Length; i++)
+            {
+                totalValue2 += intsToCompress[i];
+            }
+
+            Console.WriteLine($"For loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+            Console.WriteLine($"total: {totalValue2}");
+
+
+
+            // Foreach loop - fastest
+            int totalValue3 = 0;
+            startTime = DateTime.Now;
+
+            foreach(int intForCompression in intsToCompress)
+            {
+                totalValue3 += intForCompression;
+            }
+
+            Console.WriteLine($"Foreach loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+            Console.WriteLine($"total: {totalValue3}");
+
+
+            // While loop
+            // condition must be defined outside of the loop
+            int index = 0;
+            int totalValue4 = 0;
+            while(index < intsToCompress.Length)
+            {
+                totalValue4 += intsToCompress[index];
+                index++; // this increments the index after each addition, prevents infinite loop
+            }
+
+            Console.WriteLine($"While loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+            Console.WriteLine($"total: {totalValue4}");
+
+
+            // Do While loop - Checks conditional after first iteration, will always run at least once.
+            // condition must be defined outside of the loop
+            index = 0;
+            int totalValue5 = 0;
+            
+            do
+            {
+                totalValue5 += intsToCompress[index];
+                index++; // this increments the index after each addition, prevents infinite loop
+            } 
+            while(index < intsToCompress.Length);
+
+            Console.WriteLine($"Do While loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+            Console.WriteLine($"total: {totalValue5}");
+
+
+            // built in method
+            int totalValue6 = 0;
+            totalValue6 = intsToCompress.Sum();
+            Console.WriteLine($"Sum function: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+
+
+            // Foreach loop - with conditional statement
+            int totalValue7 = 0;
+            startTime = DateTime.Now;
+
+            foreach(int intForCompression in intsToCompress)
+            {
+                if (intForCompression > 20)
+                {
+                totalValue7 += intForCompression;
+                }
+            }
+
+            Console.WriteLine($"Foreach loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+            Console.WriteLine($"total in conditional: {totalValue7}");
         }
     }
 }
