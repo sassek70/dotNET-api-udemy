@@ -326,93 +326,117 @@ namespace HelloWorld // namespace depends on the project name.
 
         DateTime startTime = DateTime.Now;
 
-        // Manually add each index -- slow
-        int totalValue = intsToCompress[0] + intsToCompress[1]
-            + intsToCompress[2] + intsToCompress[3]
-            + intsToCompress[4] + intsToCompress[5]
-            + intsToCompress[6];
+        // // Manually add each index -- slow
+        // int totalValue = intsToCompress[0] + intsToCompress[1]
+        //     + intsToCompress[2] + intsToCompress[3]
+        //     + intsToCompress[4] + intsToCompress[5]
+        //     + intsToCompress[6];
 
             Console.WriteLine($"Manual addition: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
-            Console.WriteLine($"total: {totalValue}"); // 146
+        //     Console.WriteLine($"total: {totalValue}"); // 146
 
             
-            // For loop - faster
-            int totalValue2 = 0;         
-            startTime = DateTime.Now;
+        //     // For loop - faster
+        //     int totalValue2 = 0;         
+        //     startTime = DateTime.Now;
             
-            for (int i = 0; i < intsToCompress.Length; i++)
-            {
-                totalValue2 += intsToCompress[i];
-            }
+        //     for (int i = 0; i < intsToCompress.Length; i++)
+        //     {
+        //         totalValue2 += intsToCompress[i];
+        //     }
 
-            Console.WriteLine($"For loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
-            Console.WriteLine($"total: {totalValue2}");
+        //     Console.WriteLine($"For loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+        //     Console.WriteLine($"total: {totalValue2}");
 
 
 
-            // Foreach loop - fastest
-            int totalValue3 = 0;
-            startTime = DateTime.Now;
+        //     // Foreach loop - fastest
+        //     int totalValue3 = 0;
+        //     startTime = DateTime.Now;
+
+        //     foreach(int intForCompression in intsToCompress)
+        //     {
+        //         totalValue3 += intForCompression;
+        //     }
+
+        //     Console.WriteLine($"Foreach loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+        //     Console.WriteLine($"total: {totalValue3}");
+
+
+        //     // While loop
+        //     // condition must be defined outside of the loop
+        //     int index = 0;
+        //     int totalValue4 = 0;
+        //     while(index < intsToCompress.Length)
+        //     {
+        //         totalValue4 += intsToCompress[index];
+        //         index++; // this increments the index after each addition, prevents infinite loop
+        //     }
+
+        //     Console.WriteLine($"While loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+        //     Console.WriteLine($"total: {totalValue4}");
+
+
+        //     // Do While loop - Checks conditional after first iteration, will always run at least once.
+        //     // condition must be defined outside of the loop
+        //     index = 0;
+        //     int totalValue5 = 0;
+            
+        //     do
+        //     {
+        //         totalValue5 += intsToCompress[index];
+        //         index++; // this increments the index after each addition, prevents infinite loop
+        //     } 
+        //     while(index < intsToCompress.Length);
+
+        //     Console.WriteLine($"Do While loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+        //     Console.WriteLine($"total: {totalValue5}");
+
+
+        //     // built in method
+        //     int totalValue6 = 0;
+        //     totalValue6 = intsToCompress.Sum();
+        //     Console.WriteLine($"Sum function: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+
+
+        //     // Foreach loop - with conditional statement
+        //     int totalValue7 = 0;
+        //     startTime = DateTime.Now;
+
+        //     foreach(int intForCompression in intsToCompress)
+        //     {
+        //         if (intForCompression > 20)
+        //         {
+        //         totalValue7 += intForCompression;
+        //         }
+        //     }
+
+        //     Console.WriteLine($"Foreach loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+        //     Console.WriteLine($"total in conditional: {totalValue7}");
+
+        int totalValue8 = GetSum(intsToCompress);
+        Console.WriteLine($"Custom Method: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+        Console.WriteLine($"total in conditional: {totalValue8}");
+
+        } // this ends the main method
+
+        // ########## METHODS ##########
+        // setting "void" on a method means it won't expect anything to be returned but it can still return a value. 
+        // setting "int" means it will always have to return an integer
+        static private int GetSum(int[] intsToCompress) //args go in ()
+        {
+            // int[] intsToCompress = new int[] {10, 15, 20, 25, 30, 12, 34};
+            int totalValue = 0;
+            // DateTime startTime = DateTime.Now;
 
             foreach(int intForCompression in intsToCompress)
             {
-                totalValue3 += intForCompression;
+                totalValue += intForCompression;
             }
+            Console.WriteLine("From custom method");
 
-            Console.WriteLine($"Foreach loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
-            Console.WriteLine($"total: {totalValue3}");
+            return totalValue; // satisfies method requirement to return an integer
 
-
-            // While loop
-            // condition must be defined outside of the loop
-            int index = 0;
-            int totalValue4 = 0;
-            while(index < intsToCompress.Length)
-            {
-                totalValue4 += intsToCompress[index];
-                index++; // this increments the index after each addition, prevents infinite loop
-            }
-
-            Console.WriteLine($"While loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
-            Console.WriteLine($"total: {totalValue4}");
-
-
-            // Do While loop - Checks conditional after first iteration, will always run at least once.
-            // condition must be defined outside of the loop
-            index = 0;
-            int totalValue5 = 0;
-            
-            do
-            {
-                totalValue5 += intsToCompress[index];
-                index++; // this increments the index after each addition, prevents infinite loop
-            } 
-            while(index < intsToCompress.Length);
-
-            Console.WriteLine($"Do While loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
-            Console.WriteLine($"total: {totalValue5}");
-
-
-            // built in method
-            int totalValue6 = 0;
-            totalValue6 = intsToCompress.Sum();
-            Console.WriteLine($"Sum function: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
-
-
-            // Foreach loop - with conditional statement
-            int totalValue7 = 0;
-            startTime = DateTime.Now;
-
-            foreach(int intForCompression in intsToCompress)
-            {
-                if (intForCompression > 20)
-                {
-                totalValue7 += intForCompression;
-                }
-            }
-
-            Console.WriteLine($"Foreach loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
-            Console.WriteLine($"total in conditional: {totalValue7}");
         }
-    }
+    }// this ends the class
 }
