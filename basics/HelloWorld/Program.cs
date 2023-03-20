@@ -48,9 +48,16 @@ namespace HelloWorld // namespace depends on the project name.
 {
     internal class Program
     {
+        // a "Static" method can only access attributes from other "static" attributes
+        // a "non-static" method can access "static" or "non-static" attributes
+        static int accessibleInt = 7;
+
         static void Main(string[] args)
         {
+            int accessibleInt = 8; // this will over-ride the variable declartion from a different scope
             Console.WriteLine("Hello World!");
+            Console.WriteLine(accessibleInt);
+
 
             // sbyte = Signed Byte: 8-bit integers, value range: -128 - 127
             // sbyte mySbyte = 127;
@@ -423,7 +430,9 @@ namespace HelloWorld // namespace depends on the project name.
         // ########## METHODS ##########
         // setting "void" on a method means it won't expect anything to be returned but it can still return a value. 
         // setting "int" means it will always have to return an integer
-        static private int GetSum(int[] intsToCompress) //args go in ()
+
+
+        static private int GetSum(int[] intsToCompress) //params go in ()
         {
             // int[] intsToCompress = new int[] {10, 15, 20, 25, 30, 12, 34};
             int totalValue = 0;
