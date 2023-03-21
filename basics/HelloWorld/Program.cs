@@ -41,8 +41,10 @@ Third
 
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
+using HelloWorld.Models; // import Models folder
 
-//Basics section
+#region Basics
 // namespace HelloWorld // namespace depends on the project name. This section is basics
 // {
 
@@ -452,11 +454,14 @@ using System.Linq;
     // }// this ends the class
 
 // }
+#endregion
 
-//Advanced section
+#region Advanced
 namespace HelloWorld
 {
-    // ########## MODELS ##########
+    
+ 
+    #region //########## MODELS ##########
     public class Computer
     {
         /* "public" lets an attribute be accessible in every instance of Computer
@@ -481,6 +486,7 @@ namespace HelloWorld
 
             // 
         */
+    
 
         // Use {get; set;} instead of public fields. Some libraries will ignore public fields
         // public string? Motherboard {get; set;} // adding a "?" makes it nullable. not recommended.
@@ -507,7 +513,8 @@ namespace HelloWorld
                 Motherboard = "";
             }
         }
-
+#endregion
+        
         internal class Program {
             static void Main(string[] args){
                 
@@ -532,8 +539,18 @@ namespace HelloWorld
 
                 Console.WriteLine(myComputer.HasWifi);
 
+
+                Car myCar = new Car()
+                {
+                    Make = "Toyota",
+                    Model = "Tacoma"
+                };
+
+                Console.WriteLine(myCar.Make + " " + myCar.Model);
+
             }
 
         }
     }
 }
+#endregion
