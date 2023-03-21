@@ -39,24 +39,26 @@ Third
 
 
 
-// ########## VARIABLES ##########
-
-
 using System;
 using System.Linq;
-namespace HelloWorld // namespace depends on the project name.
-{
-    internal class Program
-    {
+
+//Basics section
+// namespace HelloWorld // namespace depends on the project name. This section is basics
+// {
+
+// ########## VARIABLES ##########
+
+    // internal class Program
+    // {
         // a "Static" method can only access attributes from other "static" attributes
         // a "non-static" method can access "static" or "non-static" attributes
-        static int accessibleInt = 7;
+        // static int accessibleInt = 7;
 
-        static void Main(string[] args)
-        {
-            int accessibleInt = 8; // this will over-ride the variable declartion from a different scope
-            Console.WriteLine("Hello World!");
-            Console.WriteLine(accessibleInt);
+        // static void Main(string[] args)
+        // {
+            // int accessibleInt = 8; // this will over-ride the variable declartion from a different scope
+            // Console.WriteLine("Hello World!");
+            // Console.WriteLine(accessibleInt);
 
 
             // sbyte = Signed Byte: 8-bit integers, value range: -128 - 127
@@ -329,9 +331,9 @@ namespace HelloWorld // namespace depends on the project name.
 
         // ########## LOOPS ##########
 
-        int[] intsToCompress = new int[] {10, 15, 20, 25, 30, 12, 34};
+        // int[] intsToCompress = new int[] {10, 15, 20, 25, 30, 12, 34};
 
-        DateTime startTime = DateTime.Now;
+        // DateTime startTime = DateTime.Now;
 
         // // Manually add each index -- slow
         // int totalValue = intsToCompress[0] + intsToCompress[1]
@@ -339,7 +341,7 @@ namespace HelloWorld // namespace depends on the project name.
         //     + intsToCompress[4] + intsToCompress[5]
         //     + intsToCompress[6];
 
-            Console.WriteLine($"Manual addition: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+            // Console.WriteLine($"Manual addition: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
         //     Console.WriteLine($"total: {totalValue}"); // 146
 
             
@@ -421,31 +423,117 @@ namespace HelloWorld // namespace depends on the project name.
         //     Console.WriteLine($"Foreach loop: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
         //     Console.WriteLine($"total in conditional: {totalValue7}");
 
-        int totalValue8 = GetSum(intsToCompress);
-        Console.WriteLine($"Custom Method: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
-        Console.WriteLine($"total in conditional: {totalValue8}");
+        // int totalValue8 = GetSum(intsToCompress);
+        // Console.WriteLine($"Custom Method: {((decimal)(DateTime.Now - startTime).TotalMilliseconds)} milliseconds");
+        // Console.WriteLine($"total in conditional: {totalValue8}");
 
-        } // this ends the main method
+        // } // this ends the main method
 
         // ########## METHODS ##########
         // setting "void" on a method means it won't expect anything to be returned but it can still return a value. 
         // setting "int" means it will always have to return an integer
 
 
-        static private int GetSum(int[] intsToCompress) //params go in ()
+    //     static private int GetSum(int[] intsToCompress) //params go in ()
+    //     {
+    //         // int[] intsToCompress = new int[] {10, 15, 20, 25, 30, 12, 34};
+    //         int totalValue = 0;
+    //         // DateTime startTime = DateTime.Now;
+
+    //         foreach(int intForCompression in intsToCompress)
+    //         {
+    //             totalValue += intForCompression;
+    //         }
+    //         Console.WriteLine("From custom method");
+
+    //         return totalValue; // satisfies method requirement to return an integer
+
+    //     }
+    // }// this ends the class
+
+// }
+
+//Advanced section
+namespace HelloWorld
+{
+    // ########## MODELS ##########
+    public class Computer
+    {
+        /* "public" lets an attribute be accessible in every instance of Computer
+            
+            -- ERROR: Cannot access due to protection level -> Check public/private setting on attributes & model
+            
+            Field: a variable of any type that is declared directly in a class or struct
+
+            NOTE:  ADDING A ";" TO THE END OF EACH LINE CREATES A "FIELD" PUBLIC FIELDS SHOULD BE AVOIDED.
+            to make a field Private, add two lines, a "getter" and a "setter":
+
+
+            // DEPRECATED METHOD: 
+
+            private string _motherboard; //creates a private field
+            private string Motherboard {get{return _motherboard;} set {_motherboard = value;}} // allows for accessing & modifying the private field
+
+
+            // CURRENT METHOD:
+
+            private string Motherboard {get; set;} // Creates private field and "setter/getter" at the same time
+
+            // 
+        */
+
+        // Use {get; set;} instead of public fields. Some libraries will ignore public fields
+        // public string? Motherboard {get; set;} // adding a "?" makes it nullable. not recommended.
+        public string Motherboard {get; set;}
+        public int CPUCores {get; set;}
+        public bool HasWifi {get; set;}
+        public bool HasLTE {get; set;}
+        public DateTime ReleaseDate {get; set;}
+        public decimal Price {get; set;}
+        public string VideoCard {get; set;}
+
+
+        // Use a constructor to handle cases where a value can be null, like an empty string
+
+        public Computer()
         {
-            // int[] intsToCompress = new int[] {10, 15, 20, 25, 30, 12, 34};
-            int totalValue = 0;
-            // DateTime startTime = DateTime.Now;
-
-            foreach(int intForCompression in intsToCompress)
+            if (VideoCard == null)
             {
-                totalValue += intForCompression;
+                VideoCard = "";
             }
-            Console.WriteLine("From custom method");
 
-            return totalValue; // satisfies method requirement to return an integer
+            if (Motherboard == null)
+            {
+                Motherboard = "";
+            }
+        }
+
+        internal class Program {
+            static void Main(string[] args){
+                
+                Computer myComputer = new Computer()
+                { 
+                    Motherboard = "z570",
+                    HasWifi = true,
+                    HasLTE = false,
+                    ReleaseDate = DateTime.Now,
+                    Price = 449.99m,
+                    VideoCard = "6800XT",
+                };
+
+                Console.WriteLine(myComputer.Motherboard);
+                Console.WriteLine(myComputer.HasLTE);
+                Console.WriteLine(myComputer.HasWifi);
+                Console.WriteLine(myComputer.Price);
+                Console.WriteLine(myComputer.Motherboard);
+                Console.WriteLine(myComputer.ReleaseDate);
+
+                myComputer.HasWifi = false;
+
+                Console.WriteLine(myComputer.HasWifi);
+
+            }
 
         }
-    }// this ends the class
+    }
 }
