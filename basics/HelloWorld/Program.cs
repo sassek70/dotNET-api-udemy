@@ -484,7 +484,7 @@ namespace HelloWorld
 
         // Use {get; set;} instead of public fields. Some libraries will ignore public fields
         // public string? Motherboard {get; set;} // adding a "?" makes it nullable. not recommended.
-        public string Motherboard {get; set;}
+        public string Motherboard {get; set;} = ""; //sets default value of a string if it is null
         public int CPUCores {get; set;}
         public bool HasWifi {get; set;}
         public bool HasLTE {get; set;}
@@ -493,7 +493,7 @@ namespace HelloWorld
         public string VideoCard {get; set;}
 
 
-        // Use a constructor to handle cases where a value can be null, like an empty string
+        // Alternate: Use a constructor to handle cases where a value can be null, like an empty string
 
         public Computer()
         {
