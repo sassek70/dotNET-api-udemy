@@ -44,8 +44,10 @@ using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Dapper;
+using HelloWorld.Data;
 using HelloWorld.Models; // import Models folder
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 #region Basics
 // namespace HelloWorld // namespace depends on the project name. This section is basics
@@ -522,24 +524,18 @@ namespace HelloWorld
         {
             static void Main(string[] args)
             {
-                /* 
-                    To connect to a server, create a string in this format:
-                    //Windows
-                    "Server=<servername>;Database=<database name>;TrustServerCertificate=true(if running locally without SSL);Trusted_Connection=true(if using windows auth)";
+                //access connection string from appsettings.json file
+                IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
-                    //Mac/Linux
-                    "Server=<servername>;Database=<database name>;TrustServerCertificate=true(if running locally without SSL);Trusted_Connection=false; User Id=<username>;Password=<password>;";
-                */
-                string connectionString = $"Server=Merc.local;Database=DotNetCourseDatabase2;TrustServerCertificate=true;User Id=<user>;Password=<pass>";
-                
-                //make connection to db using the connectionString
-                // IDbConnection dbConnection = new SqlConnection(connectionString);
 
-                // string sqlCommand = "SELECT GETDATE()";
-                // // dbConnection.Query<DateTime>(sqlCommand); //.Query is a Dapper command, returns an array of results
-                // DateTime rightNow = dbConnection.QuerySingle<DateTime>(sqlCommand); //.Query is a Dapper command, returns a single row
+                DataContextDapper dapper = new DataContextDapper(config);
+                DataContextEntity entityFramework = new DataContextEntity(config);
 
-                // Console.WriteLine(rightNow);
+                string sqlCommand = "SELECT GETDATE()";
+                // dbConnection.Query<DateTime>(sqlCommand); //.Query is a Dapper command, returns an array of results
+                DateTime rightNow = dapper.LoadDataSingle<DateTime>(sqlCommand); //.Query is a Dapper command, returns a single row
+
+                Console.WriteLine(rightNow);
 
                 
 
@@ -550,10 +546,45 @@ namespace HelloWorld
                     HasWifi = true,
                     HasLTE = false,
                     ReleaseDate = DateTime.Now,
-                    Price = 449.99m,
-                    VideoCard = "6800XT",
+                    Price = 229.99m,
+                    VideoCard = "6700",
                 };
 
+                entityFramework.Add(myComputer);
+                entityFramework.SaveChanges();
+
+                // "@" signifies multiple lines
+                string sql = @"INSERT INTO TutorialAppSchema.Computer (
+                    Motherboard,
+                    HasWifi,
+                    HasLTE,
+                    ReleaseDate,
+                    Price,
+                    VideoCard
+                ) VALUES ('" + myComputer.Motherboard
+                            + "','" + myComputer.HasWifi
+                            + "','" + myComputer.HasLTE
+                            + "','" + myComputer.ReleaseDate
+                            + "','" + myComputer.Price
+                            + "','" + myComputer.VideoCard
+                + "')";
+
+                Console.WriteLine(sql);
+
+                int result = dapper.ExecuteSqlWithRowCount<int>(sql); // returns number of rows affected. --Dapper
+
+                Console.WriteLine("result " + result);
+
+                string sqlSelect = @"SELECT        
+                    Computer.ComputerId,             
+                    Computer.Motherboard,
+                    Computer.HasWifi,
+                    Computer.HasLTE,
+                    Computer.ReleaseDate,
+                    Computer.Price,
+                    Computer.VideoCard
+                    
+                FROM TutorialAppSchema.Computer";
                 // Console.WriteLine(myComputer.Motherboard);
                 // Console.WriteLine(myComputer.HasLTE);
                 // Console.WriteLine(myComputer.HasWifi);
@@ -561,10 +592,41 @@ namespace HelloWorld
                 // Console.WriteLine(myComputer.Motherboard);
                 // Console.WriteLine(myComputer.ReleaseDate);
 
-                myComputer.HasWifi = false;
+
+                IEnumerable<Computer> computers = dapper.LoadData<Computer>(sqlSelect);
+
+                foreach(Computer singleComputer in computers)
+                {
+                    Console.WriteLine("'" + singleComputer.CPUCores
+                            + "','" + singleComputer.Motherboard
+                            + "','" + singleComputer.HasWifi
+                            + "','" + singleComputer.HasLTE
+                            + "','" + singleComputer.ReleaseDate
+                            + "','" + singleComputer.Price
+                            + "','" + singleComputer.VideoCard
+                + "'");
+                }
+                // myComputer.HasWifi = false;
 
                 // Console.WriteLine(myComputer.HasWifi);
 
+
+
+                IEnumerable<Computer>? computersEF = entityFramework.Computer?.ToList<Computer>(); // "?" are needed since it can be nullable.
+
+                if(computersEF != null)
+                {
+                    foreach(Computer singleComputer in computersEF)
+                    {
+                        Console.WriteLine("'" + singleComputer.Motherboard
+                                + "','" + singleComputer.HasWifi
+                                + "','" + singleComputer.HasLTE
+                                + "','" + singleComputer.ReleaseDate
+                                + "','" + singleComputer.Price
+                                + "','" + singleComputer.VideoCard
+                    + "'");
+                    }
+                }
 
                 Car myCar = new Car()
                 {

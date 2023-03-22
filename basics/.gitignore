@@ -454,7 +454,7 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-.env
+appsettings.json
 
 Basics/16-HelloWorld_AsyncAwait/HelloWorld.csproj
 Basics/16-HelloWorld_AsyncAwait/Program.cs

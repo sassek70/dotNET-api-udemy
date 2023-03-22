@@ -27,8 +27,9 @@ namespace HelloWorld.Models // <ProjectName.Folder>
 
         // Use {get; set;} instead of public fields. Some libraries will ignore public fields
         // public string? Motherboard {get; set;} // adding a "?" makes it nullable. not recommended.
+        public int ComputerId {get; set;}
         public string Motherboard {get; set;} = ""; //sets default value of a string if it is null
-        public int CPUCores {get; set;}
+        public int? CPUCores {get; set;}
         public bool HasWifi {get; set;}
         public bool HasLTE {get; set;}
         public DateTime ReleaseDate {get; set;}
@@ -48,6 +49,10 @@ namespace HelloWorld.Models // <ProjectName.Folder>
             if (Motherboard == null)
             {
                 Motherboard = "";
+            }            
+            if (CPUCores == null)
+            {
+                CPUCores = 0;
             }
         }
 
