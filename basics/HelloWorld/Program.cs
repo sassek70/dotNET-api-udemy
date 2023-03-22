@@ -530,14 +530,16 @@ namespace HelloWorld
                     //Mac/Linux
                     "Server=<servername>;Database=<database name>;TrustServerCertificate=true(if running locally without SSL);Trusted_Connection=false; User Id=<username>;Password=<password>;";
                 */
-                string connectionString = "Server=localhost;Database=DotNetCourseDatabase;TrustServerCertificate=true;";
+                string connectionString = $"Server=Merc.local;Database=DotNetCourseDatabase2;TrustServerCertificate=true;User Id=<user>;Password=<pass>";
                 
                 //make connection to db using the connectionString
-                IDbConnection dbConnection = new SqlConnection(connectionString);
+                // IDbConnection dbConnection = new SqlConnection(connectionString);
 
-                string sqlCommand = "SELECT GETDATE()";
-                // dbConnection.Query<DateTime>(sqlCommand); //.Query is a Dapper command, returns an array of results
-                DateTime rightNow = dbConnection.QuerySingle<DateTime>(sqlCommand); //.Query is a Dapper command, returns a single row
+                // string sqlCommand = "SELECT GETDATE()";
+                // // dbConnection.Query<DateTime>(sqlCommand); //.Query is a Dapper command, returns an array of results
+                // DateTime rightNow = dbConnection.QuerySingle<DateTime>(sqlCommand); //.Query is a Dapper command, returns a single row
+
+                // Console.WriteLine(rightNow);
 
                 
 
@@ -552,16 +554,16 @@ namespace HelloWorld
                     VideoCard = "6800XT",
                 };
 
-                Console.WriteLine(myComputer.Motherboard);
-                Console.WriteLine(myComputer.HasLTE);
-                Console.WriteLine(myComputer.HasWifi);
-                Console.WriteLine(myComputer.Price);
-                Console.WriteLine(myComputer.Motherboard);
-                Console.WriteLine(myComputer.ReleaseDate);
+                // Console.WriteLine(myComputer.Motherboard);
+                // Console.WriteLine(myComputer.HasLTE);
+                // Console.WriteLine(myComputer.HasWifi);
+                // Console.WriteLine(myComputer.Price);
+                // Console.WriteLine(myComputer.Motherboard);
+                // Console.WriteLine(myComputer.ReleaseDate);
 
                 myComputer.HasWifi = false;
 
-                Console.WriteLine(myComputer.HasWifi);
+                // Console.WriteLine(myComputer.HasWifi);
 
 
                 Car myCar = new Car()
@@ -570,8 +572,8 @@ namespace HelloWorld
                     Model = "Tacoma"
                 };
 
-                Console.WriteLine(myCar.Make + " " + myCar.Model);
-
+                // Console.WriteLine(myCar.Make + " " + myCar.Model);
+                
             }
 
         }
