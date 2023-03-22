@@ -33,7 +33,7 @@ namespace HelloWorld.Data
 
             //target a specific table & schema
             modelBuilder.Entity<Computer>()
-            .HasKey(c => ((int)c.Price));
+            .HasKey(c => c.ComputerId);
                 // .HasNoKey();
                 // .ToTable("Computer", "TutorialAppSchema");
                 // .ToTable("tablename", "SchemaName");

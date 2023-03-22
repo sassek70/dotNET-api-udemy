@@ -463,63 +463,7 @@ using Microsoft.Extensions.Configuration;
 
 #region Advanced
 namespace HelloWorld
-{
-    
- 
-    #region //########## MODELS ##########
-    public class Computer
-    {
-        /* "public" lets an attribute be accessible in every instance of Computer
-            
-            -- ERROR: Cannot access due to protection level -> Check public/private setting on attributes & model
-            
-            Field: a variable of any type that is declared directly in a class or struct
-
-            NOTE:  ADDING A ";" TO THE END OF EACH LINE CREATES A "FIELD" PUBLIC FIELDS SHOULD BE AVOIDED.
-            to make a field Private, add two lines, a "getter" and a "setter":
-
-
-            // DEPRECATED METHOD: 
-
-            private string _motherboard; //creates a private field
-            private string Motherboard {get{return _motherboard;} set {_motherboard = value;}} // allows for accessing & modifying the private field
-
-
-            // CURRENT METHOD:
-
-            private string Motherboard {get; set;} // Creates private field and "setter/getter" at the same time
-
-            // 
-        */
-    
-
-        // Use {get; set;} instead of public fields. Some libraries will ignore public fields
-        // public string? Motherboard {get; set;} // adding a "?" makes it nullable. not recommended.
-        public string Motherboard {get; set;} = ""; //sets default value of a string if it is null
-        public int CPUCores {get; set;}
-        public bool HasWifi {get; set;}
-        public bool HasLTE {get; set;}
-        public DateTime ReleaseDate {get; set;}
-        public decimal Price {get; set;}
-        public string VideoCard {get; set;}
-
-
-        // Alternate: Use a constructor to handle cases where a value can be null, like an empty string
-
-        public Computer()
-        {
-            if (VideoCard == null)
-            {
-                VideoCard = "";
-            }
-
-            if (Motherboard == null)
-            {
-                Motherboard = "";
-            }
-        }
-#endregion
-        
+{       
         internal class Program 
         {
             static void Main(string[] args)
@@ -547,11 +491,11 @@ namespace HelloWorld
                     HasLTE = false,
                     ReleaseDate = DateTime.Now,
                     Price = 229.99m,
-                    VideoCard = "6700",
+                    VideoCard = "6800XT",
                 };
 
-                entityFramework.Add(myComputer);
-                entityFramework.SaveChanges();
+                // entityFramework.Add(myComputer);
+                // entityFramework.SaveChanges();
 
                 // "@" signifies multiple lines
                 string sql = @"INSERT INTO TutorialAppSchema.Computer (
@@ -569,22 +513,22 @@ namespace HelloWorld
                             + "','" + myComputer.VideoCard
                 + "')";
 
-                Console.WriteLine(sql);
+                // Console.WriteLine(sql);
 
-                int result = dapper.ExecuteSqlWithRowCount<int>(sql); // returns number of rows affected. --Dapper
+                // int result = dapper.ExecuteSqlWithRowCount<int>(sql); // returns number of rows affected. --Dapper
 
-                Console.WriteLine("result " + result);
+                // Console.WriteLine("result " + result);
 
-                string sqlSelect = @"SELECT        
-                    Computer.ComputerId,             
-                    Computer.Motherboard,
-                    Computer.HasWifi,
-                    Computer.HasLTE,
-                    Computer.ReleaseDate,
-                    Computer.Price,
-                    Computer.VideoCard
+                // string sqlSelect = @"SELECT        
+                //     Computer.ComputerId,             
+                //     Computer.Motherboard,
+                //     Computer.HasWifi,
+                //     Computer.HasLTE,
+                //     Computer.ReleaseDate,
+                //     Computer.Price,
+                //     Computer.VideoCard
                     
-                FROM TutorialAppSchema.Computer";
+                // FROM TutorialAppSchema.Computer";
                 // Console.WriteLine(myComputer.Motherboard);
                 // Console.WriteLine(myComputer.HasLTE);
                 // Console.WriteLine(myComputer.HasWifi);
@@ -593,52 +537,67 @@ namespace HelloWorld
                 // Console.WriteLine(myComputer.ReleaseDate);
 
 
-                IEnumerable<Computer> computers = dapper.LoadData<Computer>(sqlSelect);
+                // IEnumerable<Computer> computers = dapper.LoadData<Computer>(sqlSelect);
 
-                foreach(Computer singleComputer in computers)
-                {
-                    Console.WriteLine("'" + singleComputer.CPUCores
-                            + "','" + singleComputer.Motherboard
-                            + "','" + singleComputer.HasWifi
-                            + "','" + singleComputer.HasLTE
-                            + "','" + singleComputer.ReleaseDate
-                            + "','" + singleComputer.Price
-                            + "','" + singleComputer.VideoCard
-                + "'");
-                }
+                // foreach(Computer singleComputer in computers)
+                // {
+                //     Console.WriteLine("'" + singleComputer.ComputerId
+                //             + "','" + singleComputer.Motherboard
+                //             + "','" + singleComputer.HasWifi
+                //             + "','" + singleComputer.HasLTE
+                //             + "','" + singleComputer.ReleaseDate
+                //             + "','" + singleComputer.Price
+                //             + "','" + singleComputer.VideoCard
+                // + "'");
+                // }
                 // myComputer.HasWifi = false;
 
                 // Console.WriteLine(myComputer.HasWifi);
 
 
 
-                IEnumerable<Computer>? computersEF = entityFramework.Computer?.ToList<Computer>(); // "?" are needed since it can be nullable.
+                // IEnumerable<Computer>? computersEF = entityFramework.Computer?.ToList<Computer>(); // "?" are needed since it can be nullable.
 
-                if(computersEF != null)
-                {
-                    foreach(Computer singleComputer in computersEF)
-                    {
-                        Console.WriteLine("'" + singleComputer.Motherboard
-                                + "','" + singleComputer.HasWifi
-                                + "','" + singleComputer.HasLTE
-                                + "','" + singleComputer.ReleaseDate
-                                + "','" + singleComputer.Price
-                                + "','" + singleComputer.VideoCard
-                    + "'");
-                    }
-                }
+                // if(computersEF != null)
+                // {
+                //     foreach(Computer singleComputer in computersEF)
+                //     {
+                //         Console.WriteLine("'" + singleComputer.ComputerId
+                //                 + "','" + singleComputer.Motherboard
+                //                 + "','" + singleComputer.HasWifi
+                //                 + "','" + singleComputer.HasLTE
+                //                 + "','" + singleComputer.ReleaseDate
+                //                 + "','" + singleComputer.Price
+                //                 + "','" + singleComputer.VideoCard
+                //     + "'");
+                //     }
+                // }
 
-                Car myCar = new Car()
-                {
-                    Make = "Toyota",
-                    Model = "Tacoma"
-                };
+                // Car myCar = new Car()
+                // {
+                //     Make = "Toyota",
+                //     Model = "Tacoma"
+                // };
 
                 // Console.WriteLine(myCar.Make + " " + myCar.Model);
+
+
+                //########## READ/WRITE TO FILE ##########
+
+                File.WriteAllText("log.txt", sql); //overwrites all content everytime it is run
+
+                using StreamWriter openFile = new("log.txt", append: true); //appends to file instead of overwriting
+
+                openFile.WriteLine("\n" + sql + "\n");// adds new line before and after "sql"
+
+                openFile.Close(); // closes the file after writing, can avoid errors
+
+                string fileText = File.ReadAllText("log.txt");
+                Console.WriteLine(File.ReadAllText("log.txt"));
+
+                Console.WriteLine("from file variable:" + "\n\n" + fileText);
                 
             }
-
         }
-    }
 }
 #endregion
