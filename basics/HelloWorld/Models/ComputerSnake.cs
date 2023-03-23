@@ -1,8 +1,6 @@
-using System.Text.Json.Serialization;
-
 namespace HelloWorld.Models // <ProjectName.Folder>
 { 
-        public class Computer
+        public class ComputerSnake
     {
         /* "public" lets an attribute be accessible in every instance of Computer
             
@@ -29,49 +27,31 @@ namespace HelloWorld.Models // <ProjectName.Folder>
 
         // Use {get; set;} instead of public fields. Some libraries will ignore public fields
         // public string? Motherboard {get; set;} // adding a "?" makes it nullable. not recommended.
-
-        //JSON property attributes can be assigned in the model, the declaration affects the property directly below it.
-        [JsonPropertyName("computer_id")]
-        public int ComputerId {get; set;}
-
-        [JsonPropertyName("motherboard")]
-        public string Motherboard {get; set;} = ""; //sets default value of a string if it is null
-
-        [JsonPropertyName("cpu_cores")]
-        public int? CPUCores {get; set;}
-
-        [JsonPropertyName("has_wifi")]
-        public bool HasWifi {get; set;}
-
-        [JsonPropertyName("has_lte")]
-        public bool HasLTE {get; set;}
-
-        [JsonPropertyName("release_date")]
-        public DateTime? ReleaseDate {get; set;}
-
-        [JsonPropertyName("price")]
-        public decimal Price {get; set;}
-
-        [JsonPropertyName("video_card")]
-        public string VideoCard {get; set;}
+        public string motherboard {get; set;} = ""; //sets default value of a string if it is null
+        public int? cpu_cores {get; set;}
+        public bool has_wifi {get; set;}
+        public bool has_lte {get; set;}
+        public DateTime? release_date {get; set;}
+        public decimal price {get; set;}
+        public string video_card {get; set;}
+        public int computer_id {get; set;}
 
 
         // Alternate: Use a constructor to handle cases where a value can be null, like an empty string
-
-        public Computer()
+        public ComputerSnake()
         {
-            if (VideoCard == null)
+            if (video_card == null)
             {
-                VideoCard = "";
+                video_card = "";
             }
 
-            if (Motherboard == null)
+            if (motherboard == null)
             {
-                Motherboard = "";
+                motherboard = "";
             }            
-            if (CPUCores == null)
+            if (cpu_cores == null)
             {
-                CPUCores = 0;
+                cpu_cores = 0;
             }
         }
 
