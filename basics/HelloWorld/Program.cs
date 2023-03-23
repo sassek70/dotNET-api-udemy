@@ -42,12 +42,15 @@ Third
 using System;
 using System.Data;
 using System.Linq;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Dapper;
 using HelloWorld.Data;
 using HelloWorld.Models; // import Models folder
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 #region Basics
 // namespace HelloWorld // namespace depends on the project name. This section is basics
@@ -498,20 +501,20 @@ namespace HelloWorld
                 // entityFramework.SaveChanges();
 
                 // "@" signifies multiple lines
-                string sql = @"INSERT INTO TutorialAppSchema.Computer (
-                    Motherboard,
-                    HasWifi,
-                    HasLTE,
-                    ReleaseDate,
-                    Price,
-                    VideoCard
-                ) VALUES ('" + myComputer.Motherboard
-                            + "','" + myComputer.HasWifi
-                            + "','" + myComputer.HasLTE
-                            + "','" + myComputer.ReleaseDate
-                            + "','" + myComputer.Price
-                            + "','" + myComputer.VideoCard
-                + "')";
+                // string sql = @"INSERT INTO TutorialAppSchema.Computer (
+                //     Motherboard,
+                //     HasWifi,
+                //     HasLTE,
+                //     ReleaseDate,
+                //     Price,
+                //     VideoCard
+                // ) VALUES ('" + myComputer.Motherboard
+                //             + "','" + myComputer.HasWifi
+                //             + "','" + myComputer.HasLTE
+                //             + "','" + myComputer.ReleaseDate
+                //             + "','" + myComputer.Price
+                //             + "','" + myComputer.VideoCard
+                // + "')";
 
                 // Console.WriteLine(sql);
 
@@ -584,19 +587,84 @@ namespace HelloWorld
 
                 //########## READ/WRITE TO FILE ##########
 
-                File.WriteAllText("log.txt", sql); //overwrites all content everytime it is run
+                // File.WriteAllText("log.txt", sql); //overwrites all content everytime it is run
 
-                using StreamWriter openFile = new("log.txt", append: true); //appends to file instead of overwriting
+                // using StreamWriter openFile = new("log.txt", append: true); //appends to file instead of overwriting
 
-                openFile.WriteLine("\n" + sql + "\n");// adds new line before and after "sql"
+                // openFile.WriteLine("\n" + sql + "\n");// adds new line before and after "sql"
 
-                openFile.Close(); // closes the file after writing, can avoid errors
+                // openFile.Close(); // closes the file after writing, can avoid errors
 
-                string fileText = File.ReadAllText("log.txt");
-                Console.WriteLine(File.ReadAllText("log.txt"));
+                // string fileText = File.ReadAllText("log.txt");
+                // Console.WriteLine(File.ReadAllText("log.txt"));
 
-                Console.WriteLine("from file variable:" + "\n\n" + fileText);
+                // Console.WriteLine("from file variable:" + "\n\n" + fileText);
+
+
+                string computersJson = File.ReadAllText("Computers.json");
+
+                // Console.WriteLine(computersJson);
+
+                // this allows for camelCase json format to work without adding the "Newtonsoft.Json" package
+                // JsonSerializerOptions options = new JsonSerializerOptions()
+                // {
+                //     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                // };
+
+                // IEnumerable<Computer>? computerDataImport = JsonSerializer.Deserialize<IEnumerable<Computer>>(computersJson, options);
                 
+                // When using the "Newtonsoft.Json" package, we don't need to specify options
+                IEnumerable<Computer>? computerDataImport = JsonConvert.DeserializeObject<IEnumerable<Computer>>(computersJson);
+
+                if(computerDataImport != null){
+                    foreach( Computer computer in computerDataImport)
+                    {
+                        // Console.WriteLine(computer.Motherboard);
+                string sql = @"INSERT INTO TutorialAppSchema.Computer (
+                    Motherboard,
+                    HasWifi,
+                    HasLTE,
+                    ReleaseDate,
+                    Price,
+                    VideoCard
+                ) VALUES ('" + EscapeSingleQuote(computer.Motherboard)
+                            + "','" + computer.HasWifi
+                            + "','" + computer.HasLTE
+                            + "','" + computer.ReleaseDate
+                            + "','" + computer.Price
+                            + "','" + EscapeSingleQuote(computer.VideoCard)
+                + "')";
+
+                    dapper.ExecuteSql<string>(sql);
+
+                    static string EscapeSingleQuote(string input)
+                    {
+                        string output = input.Replace("'", "''");
+                        return output;
+                    }
+
+                    }
+                }
+                
+
+                //Serializing in both methods will return PascalCase results by default, this can be changed:
+                JsonSerializerSettings settings = new JsonSerializerSettings()
+                {
+                    //"CamelCasePropertyNamesContractResolver" uses Newtonsoft
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
+
+                //Newtonsoft
+                string computersCopySystem = JsonConvert.SerializeObject(computerDataImport);
+                File.WriteAllText("System_Text_Json_computers.txt", computersCopySystem);
+                
+                //  System
+                // "System.Text.Json.JsonSerialzer" specifies to use the "JsonSerializer" from System, not Newtonsoft, since they both have one.
+                string computersCopyNewton = System.Text.Json.JsonSerializer.Serialize(computerDataImport);
+                string computersCopyNewton2 = JsonConvert.SerializeObject(computerDataImport, settings);
+                File.WriteAllText("Newtonsoft_Json_computers.txt", computersCopyNewton);
+                File.WriteAllText("Newtonsoft_Json_computers2.txt", computersCopyNewton2);
+
             }
         }
 }
