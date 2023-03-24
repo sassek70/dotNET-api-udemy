@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using DotnetAPI.Data;
+using DotnetAPI.Models;
+using DotnetAPI.DTO;
 
 namespace DotnetAPI.Controllers;
 
@@ -92,7 +94,8 @@ public class UserController : ControllerBase // <Class Name> ":" == "inherit fro
     }
 
     [HttpPost("AddUser")]
-    public IActionResult AddUser(User user)
+    // UserDTO -- DTO = Data Transfer Object, separate class with only the attributes you need to worry about. i.e: we don't need userId when creating a new user.
+    public IActionResult AddUser(UserDTO user)
     {
         string sql = @"INSERT INTO TutorialAppSchema.Users(
                     [FirstName],
@@ -108,11 +111,27 @@ public class UserController : ControllerBase // <Class Name> ":" == "inherit fro
                     "', '" + user.Active + 
                 "')";
 
-                if (_dapper.ExecuteSql(sql))
+        if (_dapper.ExecuteSql(sql))
         {
             return Ok();
         }
 
-        throw new Exception("Failed to update user.");
+        throw new Exception("Failed to add user.");
+    }
+
+    [HttpDelete("DeleteUser/{userId}")]
+    public IActionResult DeleteUser(int userId)
+    {
+        string sql = @"
+            DELETE FROM TutorialAppSchema.Users
+                WHERE UserId = " + userId.ToString();
+
+
+        if (_dapper.ExecuteSql(sql))
+        {
+            return Ok();
+        }
+
+        throw new Exception("Failed to delete user.");
     }
 }

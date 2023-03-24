@@ -1,8 +1,7 @@
-namespace DotnetAPI.Models
+namespace DotnetAPI.DTO
 {
-    public partial class User  // "partial" allows for model to be added to later if needed -- typically singular
+    public partial class UserDTO  // "partial" allows for model to be added to later if needed -- typically singular
     {
-        public int UserId {get; set;}
         public string FirstName {get; set;} = "";
         public string LastName {get; set;} = "";
         public string Email{get; set;} = "";
