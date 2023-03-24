@@ -1,6 +1,6 @@
 namespace DotnetAPI
 {
-    public partial class Users  // "partial" allows for model to be added to later if needed
+    public partial class User  // "partial" allows for model to be added to later if needed -- typically singular
     {
         public int UserId {get; set;}
         public string FirstName {get; set;} = "";
