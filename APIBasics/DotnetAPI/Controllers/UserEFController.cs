@@ -116,4 +116,24 @@ public class UserEFController : ControllerBase // <Class Name> ":" == "inherit f
         
         throw new Exception("Failed to delete user.");
     }
+
+    // ############################################################
+    // ############################################################
+    // ############################################################
+
+    // [HttpGet("UserSalary/{userId}")]
+    // public IActionResult GetUserSalary(int userId)
+    // {
+    //     User? userDb = _entityFramework.Users.Where(u => u.UserId == userId).FirstOrDefault<User>();
+        
+
+    //     UserSalary? userSalaryDb = _entityFramework.UserSalary.Where(user => user.UserId == userId).FirstOrDefault<UserSalary>();
+
+    //     if (userSalaryDb != null)
+    //     {
+    //        return userSalaryDb;
+    //     }
+
+    //     throw new Exception("Cannot find user salary");
+    // }
 }
