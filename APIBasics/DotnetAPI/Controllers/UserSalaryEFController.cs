@@ -11,13 +11,13 @@ namespace DotnetAPI.Controllers
     public class UserSalaryEFController : ControllerBase
     {
         DataContextEF _entityframework;
-        IUserRepository _userRepository;
+        IUserSalaryRepository _userSalaryRepository;
         IMapper _mapper;
         
-        public UserSalaryEFController(IConfiguration config, IUserRepository userRepository)
+        public UserSalaryEFController(IConfiguration config, IUserSalaryRepository userSalaryRepository)
         {
             _entityframework = new DataContextEF(config);
-            _userRepository = userRepository;
+            _userSalaryRepository = userSalaryRepository;
             _mapper = new Mapper(new MapperConfiguration(config => {
                 config.CreateMap<UserSalaryDTO, UserSalary>();
             }));
@@ -54,7 +54,7 @@ namespace DotnetAPI.Controllers
             if (userSalaryDb != null)
             {
                 userSalaryDb.Salary = userSalary.Salary;
-                if(_userRepository.SaveChanges())
+                if(_userSalaryRepository.SaveChanges())
                 // if(_entityframework.SaveChanges() > 0)
                 {
                     return Ok();
@@ -70,9 +70,9 @@ namespace DotnetAPI.Controllers
         [HttpPost("AddNewSalary")]
         public IActionResult AddNewSalary(UserSalary newSalary)
         {
-            if(_userRepository.AddEntity(newSalary))
+            if(_userSalaryRepository.AddEntity(newSalary))
             {
-                _userRepository.SaveChanges();
+                _userSalaryRepository.SaveChanges();
                 return Ok();
             }
             throw new Exception("Failed to add salary");
@@ -84,8 +84,8 @@ namespace DotnetAPI.Controllers
             UserSalary? salaryToDelete = _entityframework.UserSalary.Where(u => u.UserId == userId).FirstOrDefault<UserSalary>();
             if(salaryToDelete != null)
             {
-                _userRepository.RemoveEntity(salaryToDelete);
-                 if (_userRepository.SaveChanges())
+                _userSalaryRepository.RemoveEntity(salaryToDelete);
+                 if (_userSalaryRepository.SaveChanges())
                 {
                     return Ok();
                 }

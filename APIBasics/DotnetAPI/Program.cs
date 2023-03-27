@@ -39,6 +39,8 @@ builder.Services.AddCors((options) =>
 });
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserSalaryRepository, UserSalaryRepository>();
+builder.Services.AddScoped<IUserJobInfoRepository, UserJobInfoRepository>();
 
 var app = builder.Build();
 

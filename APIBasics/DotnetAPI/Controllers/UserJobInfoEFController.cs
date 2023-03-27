@@ -11,13 +11,13 @@ namespace DotnetAPI.Controllers
     public class UserJobInfoEFController : ControllerBase
     {
         DataContextEF _entityframework;
-        IUserRepository _userRepository;
+        IUserJobInfoRepository _userJobInfoRepository;
         // IMapper _mapper;
         
-        public UserJobInfoEFController(IConfiguration config, IUserRepository userRepository)
+        public UserJobInfoEFController(IConfiguration config, IUserJobInfoRepository userJobInfoRepository)
         {
             _entityframework = new DataContextEF(config);
-            _userRepository = userRepository;
+            _userJobInfoRepository = userJobInfoRepository;
             // _mapper = new Mapper(new MapperConfiguration(config => {
             //     config.CreateMap<UserJobInfoDTO, UserJobInfo>();
             // }));
@@ -55,7 +55,7 @@ namespace DotnetAPI.Controllers
             {
                 UserJobInfoDb.JobTitle = UserJobInfo.JobTitle;
                 UserJobInfoDb.Department = UserJobInfo.Department;
-                if(_userRepository.SaveChanges())
+                if(_userJobInfoRepository.SaveChanges())
                 {
                     return Ok();
                 }
@@ -70,9 +70,9 @@ namespace DotnetAPI.Controllers
         [HttpPost("AddNewJobInfo")]
         public IActionResult AddNewJobInfo(UserJobInfo newJobInfo)
         {
-            _userRepository.AddEntity(newJobInfo);
+            _userJobInfoRepository.AddEntity(newJobInfo);
 
-            if(_userRepository.SaveChanges())
+            if(_userJobInfoRepository.SaveChanges())
             {
                 return Ok();
             }
@@ -85,8 +85,8 @@ namespace DotnetAPI.Controllers
             UserJobInfo? JobInfoToDelete = _entityframework.UserJobInfo.Where(u => u.UserId == userId).FirstOrDefault<UserJobInfo>();
             if(JobInfoToDelete != null)
             {
-                _userRepository.RemoveEntity(JobInfoToDelete);
-                _userRepository.SaveChanges();
+                _userJobInfoRepository.RemoveEntity(JobInfoToDelete);
+                _userJobInfoRepository.SaveChanges();
                 return Ok();
             }
             throw new Exception("Failed to delete");
