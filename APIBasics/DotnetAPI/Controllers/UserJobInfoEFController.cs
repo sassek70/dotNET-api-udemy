@@ -11,11 +11,13 @@ namespace DotnetAPI.Controllers
     public class UserJobInfoEFController : ControllerBase
     {
         DataContextEF _entityframework;
+        IUserRepository _userRepository;
         // IMapper _mapper;
         
-        public UserJobInfoEFController(IConfiguration config)
+        public UserJobInfoEFController(IConfiguration config, IUserRepository userRepository)
         {
             _entityframework = new DataContextEF(config);
+            _userRepository = userRepository;
             // _mapper = new Mapper(new MapperConfiguration(config => {
             //     config.CreateMap<UserJobInfoDTO, UserJobInfo>();
             // }));
@@ -53,7 +55,7 @@ namespace DotnetAPI.Controllers
             {
                 UserJobInfoDb.JobTitle = UserJobInfo.JobTitle;
                 UserJobInfoDb.Department = UserJobInfo.Department;
-                if(_entityframework.SaveChanges() > 0)
+                if(_userRepository.SaveChanges())
                 {
                     return Ok();
                 }
@@ -68,9 +70,9 @@ namespace DotnetAPI.Controllers
         [HttpPost("AddNewJobInfo")]
         public IActionResult AddNewJobInfo(UserJobInfo newJobInfo)
         {
-            _entityframework.UserJobInfo.Add(newJobInfo);
+            _userRepository.AddEntity(newJobInfo);
 
-            if(_entityframework.SaveChanges() > 0)
+            if(_userRepository.SaveChanges())
             {
                 return Ok();
             }
@@ -83,8 +85,8 @@ namespace DotnetAPI.Controllers
             UserJobInfo? JobInfoToDelete = _entityframework.UserJobInfo.Where(u => u.UserId == userId).FirstOrDefault<UserJobInfo>();
             if(JobInfoToDelete != null)
             {
-                _entityframework.UserJobInfo.Remove(JobInfoToDelete);
-                _entityframework.SaveChanges();
+                _userRepository.RemoveEntity(JobInfoToDelete);
+                _userRepository.SaveChanges();
                 return Ok();
             }
             throw new Exception("Failed to delete");

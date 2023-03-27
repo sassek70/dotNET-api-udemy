@@ -14,12 +14,16 @@ namespace DotnetAPI.Controllers;
 public class UserEFController : ControllerBase // <Class Name> ":" == "inherit from" "ControllerBase" class. Similar to ActiveRecord
 {
     DataContextEF _entityFramework;
+    IUserRepository _userRepository;
     IMapper _mapper;
 
 
-    public UserEFController(IConfiguration config)
+    public UserEFController(IConfiguration config, IUserRepository userRepository)
     {
         _entityFramework = new DataContextEF(config);
+
+        _userRepository = userRepository;
+
         _mapper = new Mapper(new MapperConfiguration(config =>{
             config.CreateMap<UserDTO, User>();
         }));
@@ -62,11 +66,11 @@ public class UserEFController : ControllerBase // <Class Name> ":" == "inherit f
             userDb.LastName = user.LastName;
             userDb.Gender = user.Gender;
             userDb.Active = user.Active;
-            if (_entityFramework.SaveChanges() > 0)
+            if (_userRepository.SaveChanges())
             {
                 return Ok();
             }
-        // throw new Exception("Failed to update user.");
+        throw new Exception("Failed to update user.");
 
         }
         
@@ -89,15 +93,20 @@ public class UserEFController : ControllerBase // <Class Name> ":" == "inherit f
            userDb.Gender = user.Gender;
            userDb.Active = user.Active;
         */
-           _entityFramework.Add(userDb);
+        //    _entityFramework.Add(userDb);
 
-        if (_entityFramework.SaveChanges() > 0)
+        // if (_userRepository.SaveChanges())
+        // {
+        //     return Ok();
+        // }
+        // throw new Exception("Failed to create user.");
+
+        if( _userRepository.AddEntity(user))
         {
+            _userRepository.SaveChanges();
             return Ok();
         }
         throw new Exception("Failed to create user.");
-
-        
     }
 
     [HttpDelete("DeleteUser/{userId}")]
@@ -107,8 +116,8 @@ public class UserEFController : ControllerBase // <Class Name> ":" == "inherit f
 
         if (userDb != null)
         {
-            _entityFramework.Users.Remove(userDb);
-            if (_entityFramework.SaveChanges() > 0)
+         _userRepository.RemoveEntity(userDb);
+            if (_userRepository.SaveChanges())
             {
                 return Ok();
             }
