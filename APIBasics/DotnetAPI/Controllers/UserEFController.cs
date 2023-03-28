@@ -13,14 +13,14 @@ namespace DotnetAPI.Controllers;
 //End point is class name - "Controller" --- `/User`
 public class UserEFController : ControllerBase // <Class Name> ":" == "inherit from" "ControllerBase" class. Similar to ActiveRecord
 {
-    DataContextEF _entityFramework;
+    // DataContextEF _entityFramework;
     IUserRepository _userRepository;
     IMapper _mapper;
 
 
     public UserEFController(IConfiguration config, IUserRepository userRepository)
     {
-        _entityFramework = new DataContextEF(config);
+        // _entityFramework = new DataContextEF(config);
 
         _userRepository = userRepository;
 
@@ -36,8 +36,9 @@ public class UserEFController : ControllerBase // <Class Name> ":" == "inherit f
     public User GetSingleUser(int userId) // will return a single User instance
     {
         
-        User? user = _entityFramework.Users.Where(u => u.UserId == userId).FirstOrDefault<User>();           
-        
+        // User? user = _entityFramework.Users.Where(u => u.UserId == userId).FirstOrDefault<User>();           
+        User? user = _userRepository.GetById(userId);
+
         if (user != null)
         {
             return user; 
@@ -48,33 +49,39 @@ public class UserEFController : ControllerBase // <Class Name> ":" == "inherit f
     }
 
     [HttpGet("GetUsers")]
-
-    public IEnumerable<User> GetAllUsers()
+    public List<User> GetAllUsers()
     {
-        IEnumerable<User> users = _entityFramework.Users.ToList();           
-
+        // IEnumerable<User> users = _entityFramework.Users.ToList();           
+        var users = _userRepository.GetAll();
         return users;
     }
+
     [HttpPut("EditUser")]
-    public IActionResult EditUser(User user) // IActionResult returns a response, (success/fail, error messages)
+    public IActionResult EditUser(int userId, UserDTO userDTO) // IActionResult returns a response, (success/fail, error messages)
     {
-        User? userDb = _entityFramework.Users.Where(u => u.UserId == user.UserId).FirstOrDefault<User>();           
-
-        if (userDb != null)
-        {
-            userDb.FirstName = user.FirstName;
-            userDb.LastName = user.LastName;
-            userDb.Gender = user.Gender;
-            userDb.Active = user.Active;
-            if (_userRepository.SaveChanges())
-            {
-                return Ok();
-            }
-        throw new Exception("Failed to update user.");
-
-        }
+        // User? userDb = _entityFramework.Users.Where(u => u.UserId == user.UserId).FirstOrDefault<User>();           
+        var userDb = _userRepository.GetById(userId);
         
-        throw new Exception("Failed to get user.");
+
+        var isSuccess = _userRepository.UpdateUser(userId, userDTO);
+
+        return isSuccess ? Ok() : throw new Exception("Failed to update user.");
+        // if (userDb != null)
+        // {
+        //     userDb.FirstName = userDTO.FirstName;
+        //     userDb.LastName = userDTO.LastName;
+        //     userDb.Gender = userDTO.Gender;
+        //     userDb.Active = userDTO.Active;
+
+        //     if (_userRepository.SaveChanges())
+        //     {
+        //         return Ok();
+        //     }
+
+        //     throw new Exception("Failed to update user.");
+        // }
+        
+        // throw new Exception("Failed to get user.");
 
     }
 
@@ -84,7 +91,7 @@ public class UserEFController : ControllerBase // <Class Name> ":" == "inherit f
     {
 
         // User userDb = new User(); // not needed with AutoMapper
-            User userDb = _mapper.Map<User>(user);           
+        User userDb = _mapper.Map<User>(user);           
 
         /* This block is not needed if you use AutoMapper
            
@@ -101,7 +108,7 @@ public class UserEFController : ControllerBase // <Class Name> ":" == "inherit f
         // }
         // throw new Exception("Failed to create user.");
 
-        if( _userRepository.AddEntity(user))
+        if( _userRepository.AddEntity(userDb))
         {
             _userRepository.SaveChanges();
             return Ok();
@@ -112,18 +119,18 @@ public class UserEFController : ControllerBase // <Class Name> ":" == "inherit f
     [HttpDelete("DeleteUser/{userId}")]
     public IActionResult DeleteUser(int userId)
     {
-       User? userDb = _entityFramework.Users.Where(u => u.UserId == userId).FirstOrDefault<User>();           
+    //    User? userDb = _entityFramework.Users.Where(u => u.UserId == userId).FirstOrDefault<User>();           
+        User? userDb = _userRepository.GetById(userId);
 
-        if (userDb != null)
-        {
-         _userRepository.RemoveEntity(userDb);
-            if (_userRepository.SaveChanges())
-            {
-                return Ok();
-            }
-        }
         
-        throw new Exception("Failed to delete user.");
+        if (userDb == null) throw new Exception("Failed to delete user.");
+        _userRepository.RemoveEntity(userDb);
+        return Ok();
+
+            // if (_userRepository.SaveChanges())
+            // {
+            //     return Ok();
+            // }
     }
 
     // ############################################################

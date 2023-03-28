@@ -3,42 +3,39 @@ namespace DotnetAPI.Data
     public class UserSalaryRepository : IUserSalaryRepository
     {
         DataContextEF _entityFramework;
-    
-    public UserSalaryRepository(IConfiguration config)
-    {
-        _entityFramework = new DataContextEF(config);
-    }
 
-    public bool SaveChanges()
-    {
-        if(_entityFramework.SaveChanges() > 0)
+        public UserSalaryRepository(IConfiguration config)
         {
-            return true;
-        };
-        return false;
-    }
-
-    public bool AddEntity<T>(T entityToAdd)
-    {
-        if(entityToAdd != null)
-        {
-            _entityFramework.Add(entityToAdd);
-            return true;
+            _entityFramework = new DataContextEF(config);
         }
-        return false;
-    }
 
-    public bool RemoveEntity<T>(T entityToRemove)
-    {
-        if(entityToRemove != null)
+        public bool SaveChanges()
         {
-            _entityFramework.Remove(entityToRemove);
-            return true;
+            if (_entityFramework.SaveChanges() > 0)
+            {
+                return true;
+            };
+            return false;
         }
-        return false;
-    }
 
+        public bool AddEntity<T>(T entityToAdd)
+        {
+            if (entityToAdd != null)
+            {
+                _entityFramework.Add(entityToAdd);
+                return true;
+            }
+            return false;
+        }
 
-
+        public bool RemoveEntity<T>(T entityToRemove)
+        {
+            if (entityToRemove != null)
+            {
+                _entityFramework.Remove(entityToRemove);
+                return true;
+            }
+            return false;
+        }
     }
 }
