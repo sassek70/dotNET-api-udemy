@@ -1,22 +1,24 @@
+using DotnetAPI.Models;
+
 namespace DotnetAPI.Data
 {
-    public class UserSalaryRepository : IUserSalaryRepository
+    public class UserSalaryRepository : RepositoryBase<UserSalary>, IUserSalaryRepository
     {
-        DataContextEF _entityFramework;
+        // DataContextEF _entityFramework;
 
-        public UserSalaryRepository(IConfiguration config)
-        {
-            _entityFramework = new DataContextEF(config);
-        }
+        public UserSalaryRepository(IConfiguration config) : base(config) { }
+        // {
+        //     _entityFramework = new DataContextEF(config);
+        // }
 
-        public bool SaveChanges()
-        {
-            if (_entityFramework.SaveChanges() > 0)
-            {
-                return true;
-            };
-            return false;
-        }
+        // public bool SaveChanges()
+        // {
+        //     if (_entityFramework.SaveChanges() > 0)
+        //     {
+        //         return true;
+        //     };
+        //     return false;
+        // }
 
         public bool AddEntity<T>(T entityToAdd)
         {
