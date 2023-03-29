@@ -7,37 +7,25 @@ namespace DotnetAPI.Data
         // DataContextEF _entityFramework;
 
         public UserSalaryRepository(IConfiguration config) : base(config) { }
-        // {
-        //     _entityFramework = new DataContextEF(config);
-        // }
-
-        // public bool SaveChanges()
-        // {
-        //     if (_entityFramework.SaveChanges() > 0)
-        //     {
-        //         return true;
-        //     };
-        //     return false;
-        // }
-
-        public bool AddEntity<T>(T entityToAdd)
+        public UserSalary? GetById(int userId)
         {
-            if (entityToAdd != null)
-            {
-                _entityFramework.Add(entityToAdd);
-                return true;
-            }
-            return false;
+            return _entityFramework.UserSalary.Where(u => u.UserId == userId).FirstOrDefault<UserSalary>();
         }
 
-        public bool RemoveEntity<T>(T entityToRemove)
+        public List<UserSalary> GetAll()
         {
-            if (entityToRemove != null)
-            {
-                _entityFramework.Remove(entityToRemove);
-                return true;
-            }
-            return false;
+            return _entityFramework.UserSalary.ToList();
+        }
+
+        public bool UpdateUserSalary(int userId, UserSalaryDTO userSalaryDTO)
+        {
+            UserSalary? userSalaryDb = GetById(userId);
+
+            if (userSalaryDb == null) return false;
+
+            userSalaryDb.Salary = userSalaryDTO.Salary;
+
+            return SaveChanges();
         }
     }
 }

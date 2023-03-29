@@ -1,3 +1,5 @@
+using DotnetAPI.Models;
+
 namespace DotnetAPI.DTO
 {
     public partial class UserDTO  // "partial" allows for model to be added to later if needed -- typically singular
@@ -7,6 +9,8 @@ namespace DotnetAPI.DTO
         public string Email{get; set;} = "";
         public string Gender{get; set;} = "";
         public bool Active {get; set;}
+        public UserSalary? salary {get; set;}
+
     }
 
 }

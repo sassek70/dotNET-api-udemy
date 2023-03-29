@@ -8,6 +8,11 @@ namespace DotnetAPI.Models
         public string Email{get; set;} = "";
         public string Gender{get; set;} = "";
         public bool Active {get; set;}
+
+        public UserSalary? salary {get; set;}
+        // public UserJobInfo? Department {get; set;}
+        // public UserJobInfo? JobTitle {get; set;}
+
     }
 
 }
