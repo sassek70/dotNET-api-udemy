@@ -1,3 +1,4 @@
+using DotnetAPI.DTO;
 using DotnetAPI.Models;
 
 namespace DotnetAPI.Data
@@ -7,7 +8,6 @@ namespace DotnetAPI.Data
         // DataContextEF _entityFramework;
 
         public UserJobInfoRepository(IConfiguration config) : base(config) { }
-
         public UserJobInfo? GetById(int userId)
         {
             return _entityFramework.UserJobInfo.Where(u => u.UserId == userId).FirstOrDefault<UserJobInfo>();
@@ -18,16 +18,16 @@ namespace DotnetAPI.Data
             return _entityFramework.UserJobInfo.ToList();
         }
 
-        public bool UpdateUserJobInfo(int userId, UserJobInfoDTO UserJobInfoDTO)
+        public bool UpdateUserJobInfo(int userId, UserJobInfoDTO userJobInfoDTO)
         {
-            UserJobInfo? UserJobInfoDb = GetById(userId);
+            UserJobInfo? userJobInfoDb = GetById(userId);
 
-            if (UserJobInfoDb == null) return false;
+            if (userJobInfoDb == null) return false;
 
-            UserJobInfoDb.Salary = UserJobInfoDTO.Salary;
+            userJobInfoDb.JobTitle = userJobInfoDTO.JobTitle;
+            userJobInfoDb.Department= userJobInfoDTO.Department;
 
             return SaveChanges();
         }
-
     }
 }

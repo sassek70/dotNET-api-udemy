@@ -1,4 +1,4 @@
-namespace DotnetAPI.Models
+namespace DotnetAPI.DTO
 {
     public partial class UserSalaryDTO  // "partial" allows for model to be added to later if needed
     {

@@ -1,3 +1,4 @@
+using DotnetAPI.DTO;
 using DotnetAPI.Models;
 
 namespace DotnetAPI.Data

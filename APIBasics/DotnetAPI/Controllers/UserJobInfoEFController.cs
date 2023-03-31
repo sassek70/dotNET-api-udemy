@@ -8,9 +8,9 @@ namespace DotnetAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserJobInfoEFController : RepositoryBase<UserJobInfo>, IUserJobInfoRepository
+    public class UserJobInfoEFController : ControllerBase
     {
-        DataContextEF _entityframework;
+        // DataContextEF _entityframework;
         IUserJobInfoRepository _userJobInfoRepository;
         // IMapper _mapper;
         
@@ -26,21 +26,19 @@ namespace DotnetAPI.Controllers
         [HttpGet("AllJobs")]
         public IEnumerable<UserJobInfo> UserJobs()
         {
-            IEnumerable<UserJobInfo> allJobs =  _entityframework.UserJobInfo.ToList();
-
-            return allJobs;
+            return _userJobInfoRepository.GetAll();
         }
 
         [HttpGet("UserJobInfo/{userId}")]
         public UserJobInfo GetUserJobInfo(int userId)
         {
-            UserJobInfo? userJobInfoDb = _userJobInfoRepository. GetById();
+            UserJobInfo? userJobInfoDb = _userJobInfoRepository.GetById(userId);
             // return _entityframework.UserJobInfo.Where(u => u.UserId == userId).FirstOrDefault<UserJobInfo>();
 
 
-            if(UserJobInfoDb != null)
+            if(userJobInfoDb != null)
             {
-                return UserJobInfoDb;
+                return userJobInfoDb;
                 // return Ok();
             }
             throw new Exception("User's JobInfo not found");
@@ -48,20 +46,23 @@ namespace DotnetAPI.Controllers
         }
 
         [HttpPut("EditJobInfo")]
-        public IActionResult UpdateJobInfo(UserJobInfo UserJobInfo)
+        public IActionResult UpdateJobInfo(int userId, UserJobInfoDTO userJobInfoDTO)
         {
-            UserJobInfo? UserJobInfoDb = _entityframework.UserJobInfo.Where(u => u.UserId == UserJobInfo.UserId).FirstOrDefault<UserJobInfo>();
-            if (UserJobInfoDb != null)
-            {
-                UserJobInfoDb.JobTitle = UserJobInfo.JobTitle;
-                UserJobInfoDb.Department = UserJobInfo.Department;
-                if(_userJobInfoRepository.SaveChanges())
-                {
-                    return Ok();
-                }
-                throw new Exception("Failed to update User's JobInfo");
+            UserJobInfo? userJobInfoDb = _userJobInfoRepository.GetById(userId);
+            var isSuccess = _userJobInfoRepository.UpdateUserJobInfo(userId, userJobInfoDTO);
+            
+            return isSuccess ? Ok() : throw new Exception("Failed to update User's JobInfo");
 
-            }
+            // {
+            //     userJobInfoDb.JobTitle = UserJobInfo.JobTitle;
+            //     userJobInfoDb.Department = UserJobInfo.Department;
+            //     if(_userJobInfoRepository.SaveChanges())
+            //     {
+            //         return Ok();
+            //     }
+                
+
+            // }
 
             throw new Exception("Could not find User's JobInfo");
 
@@ -70,9 +71,7 @@ namespace DotnetAPI.Controllers
         [HttpPost("AddNewJobInfo")]
         public IActionResult AddNewJobInfo(UserJobInfo newJobInfo)
         {
-            _userJobInfoRepository.AddEntity(newJobInfo);
-
-            if(_userJobInfoRepository.SaveChanges())
+            if (_userJobInfoRepository.AddEntity(newJobInfo))
             {
                 return Ok();
             }
@@ -82,10 +81,10 @@ namespace DotnetAPI.Controllers
         [HttpDelete("DeleteJobInfo/{userId}")]
         public IActionResult DeleteUserJobInfo(int userId)
         {
-            UserJobInfo? JobInfoToDelete = _entityframework.UserJobInfo.Where(u => u.UserId == userId).FirstOrDefault<UserJobInfo>();
-            if(JobInfoToDelete != null)
+            UserJobInfo? jobInfoToDelete = _userJobInfoRepository.GetById(userId);
+            if(jobInfoToDelete != null)
             {
-                _userJobInfoRepository.RemoveEntity(JobInfoToDelete);
+                _userJobInfoRepository.RemoveEntity(jobInfoToDelete);
                 _userJobInfoRepository.SaveChanges();
                 return Ok();
             }

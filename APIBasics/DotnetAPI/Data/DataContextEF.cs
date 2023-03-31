@@ -33,9 +33,9 @@ namespace DotnetAPI.Data
             modelBuilder.Entity<UserSalary>().HasKey(user => user.UserId);
             // modelBuilder.Entity<UserSalary>().HasOne<User>(u => u.User);
 
-            modelBuilder.Entity<UserSalary>(e =>
-            { e.HasOne(u => u.User).WithOne(s => s.salary).HasForeignKey<UserSalary>(u => u.UserId);
-            });
+            // modelBuilder.Entity<UserSalary>(e =>
+            // { e.HasOne(u => u.User).WithOne(s => s.salary).HasForeignKey<UserSalary>(u => u.UserId);
+            // });
             // modelBuilder.Entity<UserJobInfo>().HasOne(u => u.User);
             // modelBuilder.Entity<User>().HasOne("Salary");
             // modelBuilder.Entity<User>().HasOne(u => u.Department);
