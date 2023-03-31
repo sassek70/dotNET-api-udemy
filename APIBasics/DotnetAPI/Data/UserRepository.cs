@@ -1,5 +1,6 @@
 using DotnetAPI.DTO;
 using DotnetAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DotnetAPI.Data
 {
@@ -9,7 +10,7 @@ namespace DotnetAPI.Data
 
         public User? GetById(int userId)
         {
-            return _entityFramework.Users.Where(u => u.UserId == userId).FirstOrDefault<User>();           
+            return _entityFramework.Users.Where(u => u.UserId == userId).Include("UserSalary").FirstOrDefault<User>();           
         }
 
         public List<User> GetAll()

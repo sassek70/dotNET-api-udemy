@@ -8,7 +8,7 @@ namespace DotnetAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserJobInfoEFController : ControllerBase
+    public class UserJobInfoEFController : RepositoryBase<UserJobInfo>, IUserJobInfoRepository
     {
         DataContextEF _entityframework;
         IUserJobInfoRepository _userJobInfoRepository;
@@ -16,7 +16,7 @@ namespace DotnetAPI.Controllers
         
         public UserJobInfoEFController(IConfiguration config, IUserJobInfoRepository userJobInfoRepository)
         {
-            _entityframework = new DataContextEF(config);
+            // _entityframework = new DataContextEF(config);
             _userJobInfoRepository = userJobInfoRepository;
             // _mapper = new Mapper(new MapperConfiguration(config => {
             //     config.CreateMap<UserJobInfoDTO, UserJobInfo>();
@@ -34,7 +34,7 @@ namespace DotnetAPI.Controllers
         [HttpGet("UserJobInfo/{userId}")]
         public UserJobInfo GetUserJobInfo(int userId)
         {
-            UserJobInfo? UserJobInfoDb = _entityframework.UserJobInfo.Where(u => u.UserId == userId).FirstOrDefault<UserJobInfo>();
+            UserJobInfo? userJobInfoDb = _userJobInfoRepository. GetById();
             // return _entityframework.UserJobInfo.Where(u => u.UserId == userId).FirstOrDefault<UserJobInfo>();
 
 

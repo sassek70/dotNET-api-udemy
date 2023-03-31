@@ -1,44 +1,33 @@
+using DotnetAPI.Models;
+
 namespace DotnetAPI.Data
 {
-    public class UserJobInfoRepository : IUserJobInfoRepository
+    public class UserJobInfoRepository : RepositoryBase<UserJobInfo>, IUserJobInfoRepository
     {
-        DataContextEF _entityFramework;
-    
-    public UserJobInfoRepository(IConfiguration config)
-    {
-        _entityFramework = new DataContextEF(config);
-    }
+        // DataContextEF _entityFramework;
 
-    public bool SaveChanges()
-    {
-        if(_entityFramework.SaveChanges() > 0)
-        {
-            return true;
-        };
-        return false;
-    }
+        public UserJobInfoRepository(IConfiguration config) : base(config) { }
 
-    public bool AddEntity<T>(T entityToAdd)
-    {
-        if(entityToAdd != null)
+        public UserJobInfo? GetById(int userId)
         {
-            _entityFramework.Add(entityToAdd);
-            return true;
+            return _entityFramework.UserJobInfo.Where(u => u.UserId == userId).FirstOrDefault<UserJobInfo>();
         }
-        return false;
-    }
 
-    public bool RemoveEntity<T>(T entityToRemove)
-    {
-        if(entityToRemove != null)
+        public List<UserJobInfo> GetAll()
         {
-            _entityFramework.Remove(entityToRemove);
-            return true;
+            return _entityFramework.UserJobInfo.ToList();
         }
-        return false;
-    }
 
+        public bool UpdateUserJobInfo(int userId, UserJobInfoDTO UserJobInfoDTO)
+        {
+            UserJobInfo? UserJobInfoDb = GetById(userId);
 
+            if (UserJobInfoDb == null) return false;
+
+            UserJobInfoDb.Salary = UserJobInfoDTO.Salary;
+
+            return SaveChanges();
+        }
 
     }
 }
