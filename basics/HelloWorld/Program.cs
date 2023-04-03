@@ -146,9 +146,17 @@ using Newtonsoft.Json.Serialization;
 // Console.WriteLine(myGroceryArray[2]); // Error - System.IndexOutOfRangeException: Index was outside the bounds of the array.
 
 // You can declare values when creating the array by setting them in {}, fixed length
-// string[] mySecondGroceryArray = {"Apples", "Eggs"};
+string[] mySecondGroceryArray = {"Apples", "Eggs"};
 // Console.WriteLine(mySecondGroceryArray[0]);
 // Console.WriteLine(mySecondGroceryArray[1]);
+
+// mySecondGroceryArray.Select(grocery => Console.WriteLine(grocery));
+
+foreach (string product in mySecondGroceryArray)
+{
+    Console.WriteLine(product);
+
+} 
 
 // Adding dimenstions is denoted by commas(Dimensions = commas + 1 -- [,] = 2, [,,] = 3 etc.)
 // string[,] = Two Dimensions,
