@@ -145,17 +145,17 @@ using Newtonsoft.Json.Serialization;
 // Console.WriteLine(myGroceryArray[2]); // Error - System.IndexOutOfRangeException: Index was outside the bounds of the array.
 
 // You can declare values when creating the array by setting them in {}, fixed length
-string[] mySecondGroceryArray = {"Apples", "Eggs"};
+// string[] mySecondGroceryArray = {"Apples", "Eggs"};
 // Console.WriteLine(mySecondGroceryArray[0]);
 // Console.WriteLine(mySecondGroceryArray[1]);
 
 // mySecondGroceryArray.Select(grocery => Console.WriteLine(grocery));
 
-foreach (string product in mySecondGroceryArray)
-{
-    Console.WriteLine(product);
+// foreach (string product in mySecondGroceryArray)
+// {
+//     Console.WriteLine(product);
 
-} 
+// } 
 
 // Adding dimenstions is denoted by commas(Dimensions = commas + 1 -- [,] = 2, [,,] = 3 etc.)
 // string[,] = Two Dimensions,
@@ -485,17 +485,17 @@ namespace HelloWorld
                 // local variable names are camelCase
 
                 //access connection string from appsettings.json file
-                IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                // IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
 
-                DataContextDapper dapper = new DataContextDapper(config);
-                DataContextEntity entityFramework = new DataContextEntity(config);
+                // DataContextDapper dapper = new DataContextDapper(config);
+                // DataContextEntity entityFramework = new DataContextEntity(config);
 
-                string sqlCommand = "SELECT GETDATE()";
+                // string sqlCommand = "SELECT GETDATE()";
                 // dbConnection.Query<DateTime>(sqlCommand); //.Query is a Dapper command, returns an array of results
-                DateTime rightNow = dapper.LoadDataSingle<DateTime>(sqlCommand); //.Query is a Dapper command, returns a single row
+                // DateTime rightNow = dapper.LoadDataSingle<DateTime>(sqlCommand); //.Query is a Dapper command, returns a single row
 
-                Console.WriteLine(rightNow);
+                // Console.WriteLine(rightNow);
 
                 
 
@@ -681,7 +681,7 @@ namespace HelloWorld
 
                 //######### AUTOMAPPER ##########
 
-                string computersJson = File.ReadAllText("ComputersSnake.json");
+                // string computersJson = File.ReadAllText("ComputersSnake.json");
 
                 // Mapper mapper = new Mapper(new MapperConfiguration((cfg) => {
                 //     //cfg.CreateMap<SourceModel, TargetModel>
@@ -709,14 +709,14 @@ namespace HelloWorld
 
 
             // If JSON property names are set in the model, AutoMapper & extra mapping isn't needed, i.e: IEnumerable<Computer> computerResult = mapper.Map<IEnumerable<Computer>>(computerDataImportSnake); & the Mapper block above.
-            IEnumerable<Computer>? computerDataImportSnake = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<Computer>>(computersJson);
-            if (computerDataImportSnake != null)
-            {
-                foreach (Computer computer in computerDataImportSnake)
-                {
-                    Console.WriteLine(computer.Motherboard);
-                }
-            }
+            // IEnumerable<Computer>? computerDataImportSnake = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<Computer>>(computersJson);
+            // if (computerDataImportSnake != null)
+            // {
+            //     foreach (Computer computer in computerDataImportSnake)
+            //     {
+            //         Console.WriteLine(computer.Motherboard);
+            //     }
+            // }
             
             // IEnumerable<ComputerSnake>? computerDataImportSnake = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<ComputerSnake>>(computersJson);
 
@@ -729,6 +729,14 @@ namespace HelloWorld
             //         Console.WriteLine(computer.Motherboard);
             //     }
             // }
+   
+            string stringForFloat = "0.85"; // datatype should be float
+            string stringForInt = "12345"; // datatype should be int
+
+            float parsedStringForFloat = float.Parse(stringForFloat);
+            int parsedStringForInt = Int32.Parse(stringForInt);
+            Console.WriteLine("Int = {0}, Float = {1}", parsedStringForInt, parsedStringForFloat);
+
 
             }
         }
