@@ -475,10 +475,15 @@ foreach (string product in mySecondGroceryArray)
 #region Advanced
 namespace HelloWorld
 {       
+        // Class names are PascalCase, typically nouns or noun phrases
         internal class Program 
         {
+            // Method names are PascalCase, typically verbs or verb phrases
+            // method arguments are camelCase
             static void Main(string[] args)
             {
+                // local variable names are camelCase
+
                 //access connection string from appsettings.json file
                 IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
