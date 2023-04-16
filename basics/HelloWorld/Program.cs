@@ -738,6 +738,43 @@ namespace HelloWorld
             Console.WriteLine("Int = {0}, Float = {1}", parsedStringForInt, parsedStringForFloat);
 
 
+            int age = 31;
+            string name = "Kevin";
+            string job = "Developer";
+
+            Console.WriteLine("String Concatenation");
+            Console.WriteLine("Hello my name is " + name + ", I am " + age + " years old");
+
+            //String formatting uses the index of the variables passed in. In this case:
+            // 0 = name, 1 = age, 2 = job
+            Console.WriteLine("String Formatting");
+            Console.WriteLine("Hello my name is {0}, I am {1} years old. I am a {2}", name, age, job);
+
+            //String interpolation uses a $ at the start before the opening quotes
+            Console.WriteLine("String interpolation");
+            Console.WriteLine($"Hello my name is {name}, I am {age} years old");
+
+            //Verbatim strings
+            //verbatim strings start with @ before the opening quotes, tells the compiler to take 
+            //the string literally and ignore any spaces and escape characters like \n
+            //will display it EXACTLY as shown in the quotes with line breaks/spaces etc.
+            Console.WriteLine("Verbatim String");
+            Console.WriteLine(@"Lorem ipsum \n dolar sit amet, L
+            
+            orem ipsum dolor sit amet, consectetur adipiscing elit. Cras elementum erat non purus aliquam, efficitur luctus dolor mattis. Etiam condimentum non sem ac fermentum. Integer in dolor non neque sollicitudin lacinia vel ut tellus. Phasellus vitae diam ultricies, laoreet sapien nec, aliquet ligula. Vestibulum egestas non neque a blandit. Suspendisse nec erat at quam tempus vulputate et id sem. Sed non vehicula lorem. Duis mauris massa, posuere at sapien vel, aliquet maximus tortor. Maecenas sit amet risus at dolor molestie maximus. Nulla fringilla sollicitudin odio ut dignissim. Pellentesque in augue a arcu convallis egestas. Duis in nulla vel orci feugiat blandit a aliquet tellus. Suspendisse potenti. Duis pulvinar consequat sapien quis vehicula. Etiam sit amet fermentum ex. Suspendisse euismod urna risus, non porta leo tempor vitae.
+
+
+
+
+
+Praesent ut volutpat nunc, vel faucibus risus. Maecenas sem eros, ullamcorper eu nunc vitae, ultrices sollicitudin velit. Nullam fermentum ut tellus eu porttitor. Aliquam dui est, sollicitudin sed massa vel, tempor faucibus erat. Aliquam erat volutpat. Mauris justo erat, facilisis et fermentum fringilla, venenatis at orci. Nam nisi leo, porta eget aliquet in, euismod nec tellus. Aliquam vel ex consequat, cursus lacus a, dapibus nulla. Aenean accumsan hendrerit dui vitae imperdiet. Aliquam commodo quis leo ut facilisis. Donec sed dictum erat, et accumsan mi. Quisque at orci ut dolor mollis suscipit et a eros. Aenean metus nunc, lacinia vel massa vel, sagittis faucibus metus. Integer at venenatis felis. Vestibulum vitae neque aliquet, facilisis ligula vitae, pretium arcu.
+
+Praesent malesuada ipsum sit amet sem dictum, sed laoreet ex vehicula. Praesent urna turpis, facilisis vel lorem eget, suscipit commodo mauris. Aenean varius luctus orci, non sagittis tortor dignissim sit amet. Duis ornare interdum enim non accumsan. Proin at varius elit. Vestibulum vehicula urna eget nulla egestas cursus. Etiam placerat diam nibh.
+
+Curabitur sapien quam, blandit eu mattis in, euismod sit amet nibh. Vestibulum iaculis neque purus, eu bibendum arcu eleifend eu. Nam rhoncus, turpis vel dignissim tempus, ante erat faucibus enim, eu laoreet nulla elit nec nulla. Mauris sed faucibus sem, et vehicula ipsum. Proin auctor commodo tortor et porttitor. Sed at eros ac nibh porttitor eleifend. Praesent eu arcu diam. ");
+
+
+
             }
         }
 }
