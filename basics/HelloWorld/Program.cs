@@ -775,6 +775,21 @@ Curabitur sapien quam, blandit eu mattis in, euismod sit amet nibh. Vestibulum i
 
 
 
+            string myName;
+            Console.WriteLine("Please enter your name and press enter : ");
+            myName = Console.ReadLine();
+            string myNameUpperCase = String.Format("Upper Case : {0}", myName.ToUpper());
+            string myNameLowerCase = String.Format("Lower Case : {0}", myName.ToLower());
+            // Trim removes empty space before and after
+            string myNameTrim = String.Format("Trim : {0}", myName.Trim());
+            //creates a substring of the main string from the provided index. string.Substring(index, length)
+            string myNameSubstring = String.Format("Substring : {0}", myName.Substring(0,4));
+
+            Console.WriteLine(myNameUpperCase);
+            Console.WriteLine(myNameLowerCase);
+            Console.WriteLine(myNameTrim);
+            Console.WriteLine(myNameSubstring);
+
             }
         }
 }
