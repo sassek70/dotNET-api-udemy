@@ -730,65 +730,115 @@ namespace HelloWorld
             //     }
             // }
    
-            string stringForFloat = "0.85"; // datatype should be float
-            string stringForInt = "12345"; // datatype should be int
+//             string stringForFloat = "0.85"; // datatype should be float
+//             string stringForInt = "12345"; // datatype should be int
 
-            float parsedStringForFloat = float.Parse(stringForFloat);
-            int parsedStringForInt = Int32.Parse(stringForInt);
-            Console.WriteLine("Int = {0}, Float = {1}", parsedStringForInt, parsedStringForFloat);
+//             float parsedStringForFloat = float.Parse(stringForFloat);
+//             int parsedStringForInt = Int32.Parse(stringForInt);
+//             Console.WriteLine("Int = {0}, Float = {1}", parsedStringForInt, parsedStringForFloat);
 
 
-            int age = 31;
-            string name = "Kevin";
-            string job = "Developer";
+//             int age = 31;
+//             string name = "Kevin";
+//             string job = "Developer";
 
-            Console.WriteLine("String Concatenation");
-            Console.WriteLine("Hello my name is " + name + ", I am " + age + " years old");
+//             Console.WriteLine("String Concatenation");
+//             Console.WriteLine("Hello my name is " + name + ", I am " + age + " years old");
 
-            //String formatting uses the index of the variables passed in. In this case:
-            // 0 = name, 1 = age, 2 = job
-            Console.WriteLine("String Formatting");
-            Console.WriteLine("Hello my name is {0}, I am {1} years old. I am a {2}", name, age, job);
+//             //String formatting uses the index of the variables passed in. In this case:
+//             // 0 = name, 1 = age, 2 = job
+//             Console.WriteLine("String Formatting");
+//             Console.WriteLine("Hello my name is {0}, I am {1} years old. I am a {2}", name, age, job);
 
-            //String interpolation uses a $ at the start before the opening quotes
-            Console.WriteLine("String interpolation");
-            Console.WriteLine($"Hello my name is {name}, I am {age} years old");
+//             //String interpolation uses a $ at the start before the opening quotes
+//             Console.WriteLine("String interpolation");
+//             Console.WriteLine($"Hello my name is {name}, I am {age} years old");
 
-            //Verbatim strings
-            //verbatim strings start with @ before the opening quotes, tells the compiler to take 
-            //the string literally and ignore any spaces and escape characters like \n
-            //will display it EXACTLY as shown in the quotes with line breaks/spaces etc.
-            Console.WriteLine("Verbatim String");
-            Console.WriteLine(@"Lorem ipsum \n dolar sit amet, L
+//             //Verbatim strings
+//             //verbatim strings start with @ before the opening quotes, tells the compiler to take 
+//             //the string literally and ignore any spaces and escape characters like \n
+//             //will display it EXACTLY as shown in the quotes with line breaks/spaces etc.
+//             Console.WriteLine("Verbatim String");
+//             Console.WriteLine(@"Lorem ipsum \n dolar sit amet, L
             
-            orem ipsum dolor sit amet, consectetur adipiscing elit. Cras elementum erat non purus aliquam, efficitur luctus dolor mattis. Etiam condimentum non sem ac fermentum. Integer in dolor non neque sollicitudin lacinia vel ut tellus. Phasellus vitae diam ultricies, laoreet sapien nec, aliquet ligula. Vestibulum egestas non neque a blandit. Suspendisse nec erat at quam tempus vulputate et id sem. Sed non vehicula lorem. Duis mauris massa, posuere at sapien vel, aliquet maximus tortor. Maecenas sit amet risus at dolor molestie maximus. Nulla fringilla sollicitudin odio ut dignissim. Pellentesque in augue a arcu convallis egestas. Duis in nulla vel orci feugiat blandit a aliquet tellus. Suspendisse potenti. Duis pulvinar consequat sapien quis vehicula. Etiam sit amet fermentum ex. Suspendisse euismod urna risus, non porta leo tempor vitae.
+//             orem ipsum dolor sit amet, consectetur adipiscing elit. Cras elementum erat non purus aliquam, efficitur luctus dolor mattis. Etiam condimentum non sem ac fermentum. Integer in dolor non neque sollicitudin lacinia vel ut tellus. Phasellus vitae diam ultricies, laoreet sapien nec, aliquet ligula. Vestibulum egestas non neque a blandit. Suspendisse nec erat at quam tempus vulputate et id sem. Sed non vehicula lorem. Duis mauris massa, posuere at sapien vel, aliquet maximus tortor. Maecenas sit amet risus at dolor molestie maximus. Nulla fringilla sollicitudin odio ut dignissim. Pellentesque in augue a arcu convallis egestas. Duis in nulla vel orci feugiat blandit a aliquet tellus. Suspendisse potenti. Duis pulvinar consequat sapien quis vehicula. Etiam sit amet fermentum ex. Suspendisse euismod urna risus, non porta leo tempor vitae.
 
 
 
 
 
-Praesent ut volutpat nunc, vel faucibus risus. Maecenas sem eros, ullamcorper eu nunc vitae, ultrices sollicitudin velit. Nullam fermentum ut tellus eu porttitor. Aliquam dui est, sollicitudin sed massa vel, tempor faucibus erat. Aliquam erat volutpat. Mauris justo erat, facilisis et fermentum fringilla, venenatis at orci. Nam nisi leo, porta eget aliquet in, euismod nec tellus. Aliquam vel ex consequat, cursus lacus a, dapibus nulla. Aenean accumsan hendrerit dui vitae imperdiet. Aliquam commodo quis leo ut facilisis. Donec sed dictum erat, et accumsan mi. Quisque at orci ut dolor mollis suscipit et a eros. Aenean metus nunc, lacinia vel massa vel, sagittis faucibus metus. Integer at venenatis felis. Vestibulum vitae neque aliquet, facilisis ligula vitae, pretium arcu.
+// Praesent ut volutpat nunc, vel faucibus risus. Maecenas sem eros, ullamcorper eu nunc vitae, ultrices sollicitudin velit. Nullam fermentum ut tellus eu porttitor. Aliquam dui est, sollicitudin sed massa vel, tempor faucibus erat. Aliquam erat volutpat. Mauris justo erat, facilisis et fermentum fringilla, venenatis at orci. Nam nisi leo, porta eget aliquet in, euismod nec tellus. Aliquam vel ex consequat, cursus lacus a, dapibus nulla. Aenean accumsan hendrerit dui vitae imperdiet. Aliquam commodo quis leo ut facilisis. Donec sed dictum erat, et accumsan mi. Quisque at orci ut dolor mollis suscipit et a eros. Aenean metus nunc, lacinia vel massa vel, sagittis faucibus metus. Integer at venenatis felis. Vestibulum vitae neque aliquet, facilisis ligula vitae, pretium arcu.
 
-Praesent malesuada ipsum sit amet sem dictum, sed laoreet ex vehicula. Praesent urna turpis, facilisis vel lorem eget, suscipit commodo mauris. Aenean varius luctus orci, non sagittis tortor dignissim sit amet. Duis ornare interdum enim non accumsan. Proin at varius elit. Vestibulum vehicula urna eget nulla egestas cursus. Etiam placerat diam nibh.
+// Praesent malesuada ipsum sit amet sem dictum, sed laoreet ex vehicula. Praesent urna turpis, facilisis vel lorem eget, suscipit commodo mauris. Aenean varius luctus orci, non sagittis tortor dignissim sit amet. Duis ornare interdum enim non accumsan. Proin at varius elit. Vestibulum vehicula urna eget nulla egestas cursus. Etiam placerat diam nibh.
 
-Curabitur sapien quam, blandit eu mattis in, euismod sit amet nibh. Vestibulum iaculis neque purus, eu bibendum arcu eleifend eu. Nam rhoncus, turpis vel dignissim tempus, ante erat faucibus enim, eu laoreet nulla elit nec nulla. Mauris sed faucibus sem, et vehicula ipsum. Proin auctor commodo tortor et porttitor. Sed at eros ac nibh porttitor eleifend. Praesent eu arcu diam. ");
+// Curabitur sapien quam, blandit eu mattis in, euismod sit amet nibh. Vestibulum iaculis neque purus, eu bibendum arcu eleifend eu. Nam rhoncus, turpis vel dignissim tempus, ante erat faucibus enim, eu laoreet nulla elit nec nulla. Mauris sed faucibus sem, et vehicula ipsum. Proin auctor commodo tortor et porttitor. Sed at eros ac nibh porttitor eleifend. Praesent eu arcu diam. ");
 
 
 
-            string myName;
-            Console.WriteLine("Please enter your name and press enter : ");
-            myName = Console.ReadLine();
-            string myNameUpperCase = String.Format("Upper Case : {0}", myName.ToUpper());
-            string myNameLowerCase = String.Format("Lower Case : {0}", myName.ToLower());
-            // Trim removes empty space before and after
-            string myNameTrim = String.Format("Trim : {0}", myName.Trim());
-            //creates a substring of the main string from the provided index. string.Substring(index, length)
-            string myNameSubstring = String.Format("Substring : {0}", myName.Substring(0,4));
+            /*
+                Challenge 1
+                    Declare a string variable and don’t assign any value to it.
 
-            Console.WriteLine(myNameUpperCase);
-            Console.WriteLine(myNameLowerCase);
-            Console.WriteLine(myNameTrim);
-            Console.WriteLine(myNameSubstring);
+                    Print on the console “Please enter your name and press enter”. 
+                    You can then enter your name or any other valid string like “tutorials.eu”.
+
+                    Assign that entered string to the string variable which you have declared initially.
+
+                    The program should write on the console that string in Uppercase in the first line, 
+                    then the same string in Lowercase in the second line. In the third line, it writes on the console the 
+                    string with no trailing or preceding white space like if string entered as “ tutorials.eu ” 
+                    it should be written on the console as “tutorials.eu”. And in the last line, 
+                    it should write the Substring of the entered string on the console.
+            */
+
+            // string myName;
+            // Console.WriteLine("Please enter your name and press enter : ");
+            // //Console.Readline() waits for input from the user and uses the input data
+            // myName = Console.ReadLine();
+            // string myNameUpperCase = String.Format("Upper Case : {0}", myName.ToUpper());
+            // string myNameLowerCase = String.Format("Lower Case : {0}", myName.ToLower());
+            // // Trim removes empty space before and after
+            // string myNameTrim = String.Format("Trim : {0}", myName.Trim());
+            // //creates a substring of the main string from the provided index. string.Substring(index, length)
+            // string myNameSubstring = String.Format("Substring : {0}", myName.Substring(0,4));
+
+            // Console.WriteLine(myNameUpperCase);
+            // Console.WriteLine(myNameLowerCase);
+            // Console.WriteLine(myNameTrim);
+            // Console.WriteLine(myNameSubstring);
+
+
+            /* 
+                Challenge 2
+                    This application asks the user to input a string in the first line like “Enter a string here: ”.
+
+                    In the Second Line, it should ask for the character to search in the string which you have entered 
+                    in the first line like “Enter the character to search: ”
+
+                    On the third line, it should write the index of the first occurrence of the searched character from the string.
+
+                    It should then ask to enter the first name and once the name is written and the enter button is pressed, 
+                    it should ask to enter the last name.
+
+                    It should then show your full name printed in a single line like in my case the output 
+                    will be "Denis Panjuta". Output can be different in your case. Try to store the full name in a variable, 
+                    before displaying it.
+            */
+
+            Console.WriteLine("Enter a string here: ");
+            string newString = Console.ReadLine();
+
+            Console.WriteLine("Enter a character to search for: ");
+            char character = Console.ReadLine()[0]; //get first appearnce of that character
+            Console.WriteLine($"The character {character} appears at index {newString.IndexOf(character)} of '{newString}'");
+
+            Console.WriteLine("Please enter your first name: ");
+            string firstName = Console.ReadLine();
+            Console.WriteLine("Please enter your last name: ");
+            string lastName = Console.ReadLine();
+            string fullName = firstName + " " + lastName;
+            Console.WriteLine("String formatting: {0} {1}",firstName, lastName);
+            Console.WriteLine($"String Interpolation: {fullName}");
 
             }
         }
